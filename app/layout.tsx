@@ -1,8 +1,15 @@
-import "./globals.css";
+import "@/styles/globals.scss";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
+import { ReduxProvider } from "@/providers/ReduxProvider";
+import { QueryProvider } from "@/providers/QueryProvider";
+import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Youtube Clone",
@@ -16,7 +23,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={roboto.className}>
+        <QueryProvider>
+          <ReduxProvider>
+            <header>
+              <Navbar />
+              <Sidebar />
+            </header>
+            {children}
+          </ReduxProvider>
+        </QueryProvider>
+      </body>
     </html>
   );
 }

@@ -1,0 +1,120 @@
+@use "./themeprovider/themeprovider" as theme;
+
+$transition: 0.15s linear;
+
+@mixin button-content() {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@mixin search-input-content() {
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+
+  input {
+    background: theme.$slightly-darker-color;
+    padding: 0.9em;
+    font-size: 1rem;
+    font-style: inherit;
+    font-weight: 500;
+    border: 2px solid theme.$slightly-dark-gray-color;
+    outline: none;
+    width: min(31em, 100%);
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    transition: border $transition;
+
+    &:hover {
+      border: 2px solid theme.$dark-blue-color;
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid theme.$dark-blue-color;
+    }
+
+    &::placeholder {
+      color: theme.$light-gray-color;
+      font-weight: 500;
+      font-size: 1rem;
+      font-style: inherit;
+    }
+  }
+
+  button {
+    @include button-content();
+    background: theme.$slightly-dark-gray-color;
+    padding: 0.9em 1.5em;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    transition: background $transition;
+
+    &:hover {
+      background: theme.$gray-color;
+    }
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2em 1em;
+  gap: 1em;
+
+  .web-icons {
+    display: flex;
+    align-items: center;
+
+    button {
+      @include button-content();
+      background: none;
+    }
+
+    img {
+      margin-left: 1em;
+    }
+  }
+
+  .search-input-desktop {
+    display: none;
+    @include search-input-content();
+  }
+
+  .search-input-mobile {
+    display: flex;
+    @include search-input-content();
+  }
+
+  .mobile-search {
+    @include button-content();
+    background: theme.$slightly-dark-gray-color;
+    padding: 1em 1em;
+    border-radius: 50px;
+    transition: background $transition;
+
+    &:hover {
+      background: theme.$gray-color;
+    }
+  }
+}
+
+@media (min-width: theme.$media-query-small-value) {
+  .navbar {
+    padding: 1.2em 1.5em;
+
+    .search-input-desktop {
+      display: flex;
+    }
+
+    .search-input-mobile {
+      display: none;
+    }
+  }
+
+  .mobile-search {
+    display: none;
+  }
+}
