@@ -8,8 +8,10 @@ type Params = {
 };
 
 export default async function Category({ params }: Params) {
-  //   const data = fetchData(`search?part=snippet&q=${params.category_name}`);
-  //   const category = await data;
+  // const data = fetchData(
+  //   `search?part=snippet&maxResults=50&q=${params.category_name}`
+  // );
+  // const category = await data;
 
-  return <main>{/* <Videos videos={category.data.items} /> */}</main>;
+  return <main>{/* <Videos videos={category.items} /> */}</main>;
 }

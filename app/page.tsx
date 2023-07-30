@@ -6,8 +6,8 @@ import Videos from "@/components/Videos";
 import styles from "./page.module.css";
 
 export default async function Home() {
-  // const data = fetchData("search?part=snippet&q=Latest%20Videos");
+  // const data = fetchData("search?part=snippet&maxResults=50&q=Latest%20Videos");
   // const videos = await data;
 
-  return <main>{/* <Videos videos={videos.data.items} /> */}</main>;
+  return <main>{/* <Videos videos={videos.items} /> */}</main>;
 }
