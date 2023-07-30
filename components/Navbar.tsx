@@ -34,14 +34,14 @@ const Navbar = () => {
     <nav className={styles["navbar"]}>
       <div className={styles["web-icons"]}>
         <button onClick={showNavbar}>
-          <Hamburger width="3em" height="3em" />
+          <Hamburger width="3.8em" height="3.8em" />
         </button>
         {showSearch ? null : (
           <Image
             src="/youtube.png"
             alt="Youtube Icon"
-            width={55}
-            height={55}
+            width={50}
+            height={50}
             priority
           />
         )}

@@ -15,7 +15,7 @@ $transition: 0.15s linear;
 
   input {
     background: theme.$slightly-darker-color;
-    padding: 0.9em;
+    padding: 0.75em 1em;
     font-size: 1rem;
     font-family: inherit;
     font-weight: 500;
@@ -46,7 +46,7 @@ $transition: 0.15s linear;
   button {
     @include button-content();
     background: theme.$slightly-dark-gray-color;
-    padding: 0.9em 1.5em;
+    padding: 0.75em 1.5em;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
     transition: background $transition;
@@ -62,7 +62,7 @@ $transition: 0.15s linear;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2em 1em 1.2em 1em;
+  padding: 0.85em 1em;
   gap: 1em;
   position: fixed;
   width: 100%;
@@ -95,7 +95,7 @@ $transition: 0.15s linear;
   .mobile-search {
     @include button-content();
     background: theme.$slightly-dark-gray-color;
-    padding: 1em 1em;
+    padding: 0.75em;
     border-radius: 50px;
     transition: background $transition;
 
@@ -107,7 +107,7 @@ $transition: 0.15s linear;
 
 @media (min-width: theme.$media-query-slightly-small-value) {
   .navbar {
-    padding: 1.2em 1.5em 1.2em 16em;
+    padding: 0.85em 1.5em 0.85em 16em;
 
     .web-icons {
       button {
