@@ -1,0 +1,60 @@
+@use "./themeprovider/themeprovider" as theme;
+
+@mixin category-content() {
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: theme.$white-color;
+    font-size: 1.15rem;
+    font-family: inherit;
+    font-weight: 500;
+    padding: 1em 1.3em;
+    margin: 1em 0em;
+    cursor: pointer;
+
+    .category-icon {
+      font-size: 1.5rem;
+      margin-right: 0.85em;
+    }
+  }
+}
+
+.sidebar {
+  background: theme.$slightly-darker-color;
+  position: fixed;
+  top: 0;
+  width: 16em;
+  padding: 1em;
+  height: 100vh;
+  overflow: auto;
+
+  ul {
+    list-style: none;
+
+    .active-category-link {
+      background: theme.$dark-red-color;
+      border-radius: 10px;
+      @include category-content();
+    }
+
+    .category-link {
+      background: transparent;
+      border-radius: 10px;
+      transition: background 0.1s linear;
+      @include category-content();
+
+      &:hover {
+        background: theme.$dark-red-color;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: theme.$light-gray-color;
+  }
+}

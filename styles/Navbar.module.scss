@@ -17,7 +17,7 @@ $transition: 0.15s linear;
     background: theme.$slightly-darker-color;
     padding: 0.9em;
     font-size: 1rem;
-    font-style: inherit;
+    font-family: inherit;
     font-weight: 500;
     border: 2px solid theme.$slightly-dark-gray-color;
     outline: none;
@@ -39,7 +39,7 @@ $transition: 0.15s linear;
       color: theme.$light-gray-color;
       font-weight: 500;
       font-size: 1rem;
-      font-style: inherit;
+      font-family: inherit;
     }
   }
 
@@ -58,11 +58,15 @@ $transition: 0.15s linear;
 }
 
 .navbar {
+  background: theme.$slightly-darker-color;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2em 1em;
+  padding: 1.2em 1em 1.2em 16em;
   gap: 1em;
+  position: fixed;
+  width: 100%;
+  top: 0;
 
   .web-icons {
     display: flex;
@@ -103,7 +107,7 @@ $transition: 0.15s linear;
 
 @media (min-width: theme.$media-query-small-value) {
   .navbar {
-    padding: 1.2em 1.5em;
+    padding: 1.2em 1.5em 1.2em 16em;
 
     .search-input-desktop {
       display: flex;

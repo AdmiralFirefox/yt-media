@@ -13,3 +13,22 @@
 body {
   background: theme.$slightly-darker-color;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: theme.$slightly-darker-color;
+}
+
+::-webkit-scrollbar-track {
+  background: theme.$slightly-darker-color;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme.$light-gray-color;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme.$gray-color;
+}
