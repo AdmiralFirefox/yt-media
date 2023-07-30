@@ -62,7 +62,7 @@ $transition: 0.15s linear;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2em 1em 1.2em 16em;
+  padding: 1.2em 1em 1.2em 1em;
   gap: 1em;
   position: fixed;
   width: 100%;
@@ -105,9 +105,15 @@ $transition: 0.15s linear;
   }
 }
 
-@media (min-width: theme.$media-query-small-value) {
+@media (min-width: theme.$media-query-slightly-small-value) {
   .navbar {
     padding: 1.2em 1.5em 1.2em 16em;
+
+    .web-icons {
+      button {
+        display: none;
+      }
+    }
 
     .search-input-desktop {
       display: flex;

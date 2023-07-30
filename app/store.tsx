@@ -4,14 +4,17 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 import videoReducer from "../features/video/videoSlice";
+import navbarReducer from "../features/navbar/navbarSlice";
 
 const reducers = combineReducers({
   video: videoReducer,
+  navbar: navbarReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["navbar"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -25,10 +25,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: theme.$light-gray-color;
+  background: theme.$very-light-gray-color;
   border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: theme.$gray-color;
+  background: theme.$light-gray-color;
 }

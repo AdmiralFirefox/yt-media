@@ -3,13 +3,18 @@
 import { useState, useRef } from "react";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { toggleNavbar } from "@/features/navbar/navbarSlice";
 import Hamburger from "./Icons/Hamburger";
-import styles from "@/styles/Navbar.module.scss";
 import Search from "./Icons/Search";
+import styles from "@/styles/Navbar.module.scss";
 
 const Navbar = () => {
-  const showRef = useRef(null);
   const [showSearch, setShowSearch] = useState(false);
+
+  const showRef = useRef(null);
+
+  const dispatch = useDispatch();
 
   const toggleShowSearch = () => {
     setShowSearch((search) => !search);
@@ -19,12 +24,16 @@ const Navbar = () => {
     setShowSearch(false);
   };
 
+  const showNavbar = () => {
+    dispatch(toggleNavbar(true));
+  };
+
   useOnClickOutside(showRef, handleClickOutside);
 
   return (
     <nav className={styles["navbar"]}>
       <div className={styles["web-icons"]}>
-        <button>
+        <button onClick={showNavbar}>
           <Hamburger width="3em" height="3em" />
         </button>
         {showSearch ? null : (

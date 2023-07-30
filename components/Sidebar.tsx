@@ -2,10 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import useLockedBody from "@/hooks/useLockedBody";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/app/store";
+import { toggleNavbar } from "@/features/navbar/navbarSlice";
 import { categories } from "@/utils/categories";
 import { IoHomeSharp } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import styles from "@/styles/Sidebar.module.scss";
+
+interface SidebarContentProps {
+  isHomePage: boolean;
+  pathname: string;
+  hideNavbar: () => void;
+}
 
 type CategoryIcon = {
   children: React.ReactNode;
@@ -19,54 +29,95 @@ const CategoryIcon = ({ children }: CategoryIcon) => {
   );
 };
 
+const SidebarContent = ({
+  isHomePage,
+  pathname,
+  hideNavbar,
+}: SidebarContentProps) => {
+  return (
+    <ul>
+      <li
+        className={
+          isHomePage ? styles["active-category-link"] : styles["category-link"]
+        }
+      >
+        <Link href="/" onClick={hideNavbar}>
+          <CategoryIcon>
+            <IoHomeSharp />
+          </CategoryIcon>
+          Home
+        </Link>
+      </li>
+
+      {categories.map((category) => {
+        const isActive = pathname.startsWith(
+          `/category/${category.category_name}`
+        );
+
+        return (
+          <li
+            key={category.id}
+            className={
+              isActive
+                ? styles["active-category-link"]
+                : styles["category-link"]
+            }
+          >
+            <Link
+              href={`/category/${category.category_name}`}
+              key={category.category_name}
+              onClick={hideNavbar}
+            >
+              <CategoryIcon>{category.icon}</CategoryIcon>
+              {category.category_name}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
 const Sidebar = () => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const dispatch = useDispatch();
+
+  const isToggled = useSelector((state: RootState) => state.navbar.showNavbar);
+
+  const hideNavbar = () => {
+    dispatch(toggleNavbar(false));
+  };
+
+  useLockedBody(isToggled, "root");
 
   return (
-    <aside className={styles["sidebar"]}>
-      <ul>
-        <li
-          className={
-            isHomePage
-              ? styles["active-category-link"]
-              : styles["category-link"]
-          }
-        >
-          <Link href="/">
-            <CategoryIcon>
-              <IoHomeSharp />
-            </CategoryIcon>
-            Home
-          </Link>
-        </li>
+    <>
+      <aside className={styles["sidebar-desktop"]}>
+        <SidebarContent
+          isHomePage={isHomePage}
+          pathname={pathname}
+          hideNavbar={hideNavbar}
+        />
+      </aside>
 
-        {categories.map((category) => {
-          const isActive = pathname.startsWith(
-            `/category/${category.category_name}`
-          );
+      <aside
+        className={
+          isToggled ? styles["sidebar-mobile-active"] : styles["sidebar-mobile"]
+        }
+      >
+        <SidebarContent
+          isHomePage={isHomePage}
+          pathname={pathname}
+          hideNavbar={hideNavbar}
+        />
+      </aside>
 
-          return (
-            <li
-              key={category.id}
-              className={
-                isActive
-                  ? styles["active-category-link"]
-                  : styles["category-link"]
-              }
-            >
-              <Link
-                href={`/category/${category.category_name}`}
-                key={category.category_name}
-              >
-                <CategoryIcon>{category.icon}</CategoryIcon>
-                {category.category_name}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </aside>
+      <div
+        className={isToggled ? styles["overlay-active"] : styles["overlay"]}
+        onClick={hideNavbar}
+      ></div>
+    </>
   );
 };
 
