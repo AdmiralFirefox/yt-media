@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import useLockedBody from "@/hooks/useLockedBody";
+import { useWindowSize } from "@/hooks/useWindowSize";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/app/store";
 import { toggleNavbar } from "@/features/navbar/navbarSlice";
@@ -83,6 +84,8 @@ const Sidebar = () => {
   const isHomePage = pathname === "/";
   const dispatch = useDispatch();
 
+  const { height } = useWindowSize();
+
   const isToggled = useSelector((state: RootState) => state.navbar.showNavbar);
 
   const hideNavbar = () => {
@@ -93,7 +96,10 @@ const Sidebar = () => {
 
   return (
     <>
-      <aside className={styles["sidebar-desktop"]}>
+      <aside
+        className={styles["sidebar-desktop"]}
+        style={{ height: `${height}px` }}
+      >
         <SidebarContent
           isHomePage={isHomePage}
           pathname={pathname}
@@ -105,6 +111,7 @@ const Sidebar = () => {
         className={
           isToggled ? styles["sidebar-mobile-active"] : styles["sidebar-mobile"]
         }
+        style={{ height: `${height}px` }}
       >
         <SidebarContent
           isHomePage={isHomePage}
@@ -115,6 +122,7 @@ const Sidebar = () => {
 
       <div
         className={isToggled ? styles["overlay-active"] : styles["overlay"]}
+        style={{ height: `${height}px` }}
         onClick={hideNavbar}
       ></div>
     </>
