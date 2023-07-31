@@ -6,6 +6,7 @@ export interface VideosType {
   snippet: {
     channelTitle: string;
     title: string;
+    publishTime: string;
     thumbnails: {
       medium: {
         height: number;
