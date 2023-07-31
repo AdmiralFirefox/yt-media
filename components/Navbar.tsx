@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { toggleNavbar } from "@/features/navbar/navbarSlice";
 import Hamburger from "./Icons/Hamburger";
@@ -10,6 +11,8 @@ import Search from "./Icons/Search";
 import styles from "@/styles/Navbar.module.scss";
 
 const Navbar = () => {
+  const pathname = usePathname();
+
   const [showSearch, setShowSearch] = useState(false);
 
   const showRef = useRef(null);
@@ -31,7 +34,13 @@ const Navbar = () => {
   useOnClickOutside(showRef, handleClickOutside);
 
   return (
-    <nav className={styles["navbar"]}>
+    <nav
+      className={
+        pathname === "/video"
+          ? styles["navbar-video-section"]
+          : styles["navbar"]
+      }
+    >
       <div className={styles["web-icons"]}>
         <button onClick={showNavbar}>
           <Hamburger width="3.8em" height="3.8em" />

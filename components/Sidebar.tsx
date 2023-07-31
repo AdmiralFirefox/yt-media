@@ -96,16 +96,18 @@ const Sidebar = () => {
 
   return (
     <>
-      <aside
-        className={styles["sidebar-desktop"]}
-        style={{ height: `${height}px` }}
-      >
-        <SidebarContent
-          isHomePage={isHomePage}
-          pathname={pathname}
-          hideNavbar={hideNavbar}
-        />
-      </aside>
+      {pathname === "/video" ? null : (
+        <aside
+          className={styles["sidebar-desktop"]}
+          style={{ height: `${height}px` }}
+        >
+          <SidebarContent
+            isHomePage={isHomePage}
+            pathname={pathname}
+            hideNavbar={hideNavbar}
+          />
+        </aside>
+      )}
 
       <aside
         className={
