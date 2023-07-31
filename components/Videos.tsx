@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/app/store";
 import { useSelector, useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import { setVideoID } from "../features/video/videoSlice";
 import { truncateText } from "@/utils/truncateText";
 import { VideosFeedTypes } from "@/types/VideosType";
@@ -39,7 +40,7 @@ const Videos = ({ videos }: VideosFeedTypes) => {
         .filter((video) => video.id.kind === "youtube#video")
         .map((video) => (
           <li
-            key={crypto.randomUUID()}
+            key={uuidv4()}
             onClick={() => getVideoID(video.id.videoId)}
             className={styles["video-card"]}
           >
