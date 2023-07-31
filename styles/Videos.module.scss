@@ -1,0 +1,68 @@
+@use "./themeprovider/themeprovider" as theme;
+
+.container {
+  padding: 6.5em 0em 3em 0em;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2em;
+  list-style: none;
+
+  .video-card {
+    cursor: pointer;
+
+    .image-container {
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 5px;
+      }
+    }
+
+    .video-title {
+      color: theme.$slightly-white-color;
+      margin-top: 0.2em;
+      font-size: 1.2rem;
+      font-weight: 500;
+      font-family: inherit;
+      padding-right: 1em;
+      padding-left: 0.6em;
+    }
+
+    .video-channel-title {
+      color: theme.$very-light-gray-color;
+      margin-top: 0.5em;
+      font-size: 1rem;
+      font-weight: 400;
+      padding-right: 1em;
+      padding-left: 0.6em;
+    }
+  }
+}
+
+@media (min-width: theme.$media-query-slightly-small-value) {
+  .container {
+    padding: 6.5em 2em 3em 16em;
+    grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
+    grid-column-gap: 1.5em;
+    grid-row-gap: 2em;
+
+    .video-card {
+      .video-title {
+        padding-right: 0em;
+        padding-left: 0em;
+      }
+
+      .video-channel-title {
+        padding-right: 0em;
+        padding-left: 0em;
+      }
+    }
+  }
+}
+
+@media (min-width: theme.$media-query-very-large-value) {
+  .container {
+    grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
+  }
+}
