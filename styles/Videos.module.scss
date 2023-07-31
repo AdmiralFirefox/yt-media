@@ -22,7 +22,7 @@
     .video-title {
       color: theme.$slightly-white-color;
       margin-top: 0.3em;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 500;
       font-family: inherit;
       padding-right: 1em;
@@ -32,21 +32,21 @@
     .video-channel-title {
       color: theme.$very-light-gray-color;
       margin-top: 0.5em;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 400;
       font-family: inherit;
       padding-right: 1em;
-      padding-left: 0.6em;
+      padding-left: 0.7em;
     }
 
     .video-publish-date {
       color: theme.$very-light-gray-color;
       margin-top: 0.2em;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 400;
       font-family: inherit;
       padding-right: 1em;
-      padding-left: 0.6em;
+      padding-left: 0.7em;
     }
   }
 }
