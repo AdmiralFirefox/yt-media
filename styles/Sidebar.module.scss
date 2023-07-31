@@ -102,7 +102,7 @@ $transition: 0.25s linear;
   pointer-events: none;
 }
 
-@media (min-width: theme.$media-query-slightly-small-value) {
+@media (min-width: theme.$media-query-large-value) {
   .sidebar-desktop {
     display: block;
   }
