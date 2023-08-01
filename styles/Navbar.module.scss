@@ -132,6 +132,7 @@ $transition: 0.15s linear;
 .navbar-video-section {
   padding: 0.85em 1em;
   @include navbar-content-mobile();
+  z-index: 2;
 }
 
 @media (min-width: theme.$media-query-large-value) {

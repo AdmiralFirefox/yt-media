@@ -1,0 +1,157 @@
+@use "./themeprovider/themeprovider" as theme;
+
+.video-title {
+  color: theme.$slightly-white-color;
+  font-size: 1.8rem;
+  font-weight: 600;
+  font-family: inherit;
+  margin-top: 0.5em;
+  padding-left: 0.65em;
+  padding-right: 1em;
+}
+
+.channel-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  margin-top: 0.5em;
+  padding-left: 1.3em;
+  padding-right: 1em;
+
+  a {
+    color: theme.$slightly-white-color;
+    font-size: 1.25rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .like-icon-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    background: theme.$slightly-dark-gray-color;
+    padding: 0.75em 1.15em;
+    border-radius: 50px;
+
+    .like-icon {
+      color: theme.$slightly-white-color;
+      font-size: 1.3rem;
+    }
+
+    p {
+      color: theme.$slightly-white-color;
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-family: inherit;
+    }
+  }
+}
+
+.video-description-wrapper {
+  overflow: hidden;
+  position: relative;
+  background: theme.$slightly-dark-gray-color;
+  transition: max-height 0.15s linear, background 0.15s linear;
+  border-radius: 10px;
+  margin-top: 1.2em;
+  margin-left: 1.3em;
+  margin-right: 1.5em;
+
+  .video-description-content {
+    padding: 1.5em;
+
+    .video-statistics {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      flex-wrap: wrap;
+
+      .views {
+        color: theme.$slightly-white-color;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .date {
+        color: theme.$slightly-white-color;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .tags {
+        color: theme.$light-blue-color;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+
+    .video-description-details {
+      color: theme.$slightly-white-color;
+      margin-top: 1em;
+      line-height: 1.45em;
+      font-size: 1rem;
+    }
+  }
+
+  &:hover {
+    background: theme.$gray-color;
+  }
+}
+
+.show-more-button-wrapper {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 5em;
+
+  .show-more-button {
+    border: none;
+    outline: none;
+    background: none;
+    color: theme.$slightly-white-color;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    .chevron-icon {
+      color: theme.$slightly-white-color;
+      font-size: 1.3rem;
+    }
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+@media (min-width: theme.$media-query-large-value) {
+  .video-title {
+    padding-left: 0em;
+    padding-right: 0em;
+  }
+
+  .channel-info {
+    padding-left: 0em;
+    padding-right: 0em;
+  }
+
+  .video-description-wrapper {
+    margin-left: 0em;
+    margin-right: 0em;
+  }
+}
