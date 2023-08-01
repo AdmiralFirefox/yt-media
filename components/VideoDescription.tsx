@@ -7,6 +7,8 @@ import { AiFillLike } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
 import { BsChevronUp } from "react-icons/bs";
 import { IconContext } from "react-icons";
+import { VideoDescriptionTypes } from "@/types/VideoDetailsType";
+import { formatNumber } from "@/utils/formatNumber";
 import styles from "@/styles/VideoDescription.module.scss";
 
 dayjs.extend(relativeTime);
@@ -17,7 +19,7 @@ const getTimePassed = (uploadDate: string) => {
   return uploadTime.from(now);
 };
 
-const VideoDescription = () => {
+const VideoDescription = ({ video }: VideoDescriptionTypes) => {
   const [collapse, setCollapse] = useState(true);
   const [videoDetailRef, { height }] = useElementSize();
 
@@ -29,20 +31,17 @@ const VideoDescription = () => {
     setCollapse(false);
   };
 
-  const sampleText =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. At repellat soluta sapiente explicabo quaerat necessitatibus! Accusamus, dolor unde nisi vero porro accusantium ullam necessitatibus exercitationem explicabo autem? Blanditiis aliquam quia natus reprehenderit beatae vero expedita earum quos sit veniam consequuntur praesentium, tenetur dolor tempore fuga repellat in iste quasi accusantium.";
-
   return (
     <>
-      <h1 className={styles["video-title"]}>Video Title</h1>
+      <h1 className={styles["video-title"]}>{video.snippet.title}</h1>
 
       <div className={styles["channel-info"]}>
-        <Link href="/">MrBeast</Link>
+        <Link href="/">{video.snippet.channelTitle}</Link>
         <div className={styles["like-icon-wrapper"]}>
           <IconContext.Provider value={{ className: styles["like-icon"] }}>
             <AiFillLike />
           </IconContext.Provider>
-          <p>200k</p>
+          <p>{formatNumber(video.statistics.likeCount)}</p>
         </div>
       </div>
 
@@ -59,16 +58,38 @@ const VideoDescription = () => {
           className={styles["video-description-content"]}
         >
           <div className={styles["video-statistics"]}>
-            <p className={styles["views"]}>1M Views</p>
-            <p className={styles["date"]}>{getTimePassed("04/19/2023")}</p>
-            {[...Array(7)].map((_e, id) => (
-              <p key={id} className={styles["tags"]}>
-                #tag
-              </p>
-            ))}
+            <p className={styles["views"]}>
+              {formatNumber(video.statistics.viewCount)} views
+            </p>
+            <p className={styles["date"]}>
+              {getTimePassed(video.snippet.publishedAt)}
+            </p>
+            {video.snippet.tags !== undefined ? (
+              <>
+                {video.snippet.tags.slice(0, 4).map((tag, id) => (
+                  <p key={id} className={styles["tags"]}>
+                    #{tag}
+                  </p>
+                ))}
+              </>
+            ) : null}
           </div>
 
-          <p className={styles["video-description-details"]}>{sampleText}</p>
+          <p className={styles["video-description-details"]}>
+            {video.snippet.description}
+          </p>
+
+          <div className={styles["extra-tags-wrapper"]}>
+            {video.snippet.tags !== undefined ? (
+              <>
+                {video.snippet.tags.map((tag, id) => (
+                  <p key={id} className={styles["extra-tags"]}>
+                    #{tag}
+                  </p>
+                ))}
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
 

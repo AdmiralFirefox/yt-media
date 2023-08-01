@@ -8,14 +8,15 @@
   margin-top: 0.5em;
   padding-left: 0.65em;
   padding-right: 1em;
+  overflow-wrap: break-word;
 }
 
 .channel-info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 1em;
-  margin-top: 0.5em;
+  margin-top: 1.2em;
   padding-left: 1.3em;
   padding-right: 1em;
 
@@ -25,6 +26,7 @@
     text-decoration: none;
     font-weight: 600;
     font-family: inherit;
+    overflow-wrap: break-word;
 
     &:hover {
       text-decoration: underline;
@@ -57,7 +59,7 @@
   overflow: hidden;
   position: relative;
   background: theme.$slightly-dark-gray-color;
-  transition: max-height 0.15s linear, background 0.15s linear;
+  transition: max-height 0.4s linear, background 0.15s linear;
   border-radius: 10px;
   margin-top: 1.2em;
   margin-left: 1.3em;
@@ -99,6 +101,22 @@
       margin-top: 1em;
       line-height: 1.45em;
       font-size: 1rem;
+      overflow-wrap: break-word;
+    }
+
+    .extra-tags-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      flex-wrap: wrap;
+      margin-top: 1.5em;
+
+      .extra-tags {
+        color: theme.$light-blue-color;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 500;
+      }
     }
   }
 

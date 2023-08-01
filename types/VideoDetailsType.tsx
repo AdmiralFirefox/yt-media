@@ -12,3 +12,11 @@ export interface VideoDetailsType {
     viewCount: string;
   };
 }
+
+export interface VideoDescriptionTypes {
+  video: VideoDetailsType;
+}
+
+export interface VideoTypes {
+  items: VideoDetailsType[];
+}

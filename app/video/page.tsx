@@ -6,33 +6,31 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import ReactPlayer from "react-player/youtube";
 import VideoDescription from "@/components/VideoDescription";
+import { VideoTypes } from "@/types/VideoDetailsType";
 import styles from "@/styles/Video.module.scss";
 
 export default function Video() {
   const videoID = useSelector((state: RootState) => state.video.videoID);
 
-  // const {
-  //   data: video,
-  //   isLoading,
-  //   isError,
-  //   error,
-  // }: UseQueryResult<unknown, Error> = useQuery<unknown, Error>({
-  //   queryKey: ["video", videoID],
-  //   queryFn: () => fetchData(`videos?part=snippet,statistics&id=${videoID}`),
-  //   staleTime: 30000,
-  //   enabled: Boolean(videoID),
-  // });
+  const {
+    data: video,
+    isLoading,
+    isError,
+    error,
+  }: UseQueryResult<VideoTypes, Error> = useQuery<VideoTypes, Error>({
+    queryKey: ["video", videoID],
+    queryFn: () => fetchData(`videos?part=snippet,statistics&id=${videoID}`),
+    staleTime: 30000,
+    enabled: Boolean(videoID),
+  });
 
-  // if (isLoading) {
-  //   return <h1>Loading...</h1>;
-  // }
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
 
-  // if (isError) {
-  //   return <h1>{error!.message}</h1>;
-  // }
-
-  // console.log(video.items);
-  // console.log(videoID);
+  if (isError) {
+    return <h1>{error!.message}</h1>;
+  }
 
   return (
     <main className={styles["container"]}>
@@ -46,7 +44,7 @@ export default function Video() {
           />
         </div>
 
-        <VideoDescription />
+        <VideoDescription video={video.items[0]} />
       </div>
       <div>
         {[...Array(10)].map((_e, key) => (
