@@ -8,6 +8,7 @@ import ReactPlayer from "react-player/youtube";
 import VideoDescription from "@/components/VideoDescription";
 import { VideoTypes } from "@/types/VideoDetailsType";
 import SuggestedVideos from "@/components/SuggestedVideos";
+import { SuggestedVideosType } from "@/types/SuggestedVideos";
 import styles from "@/styles/Video.module.scss";
 
 export default function Video() {
@@ -30,7 +31,10 @@ export default function Video() {
     isLoading: isVideosLoading,
     isError: isVideosError,
     error: videosError,
-  }: UseQueryResult<unknown, Error> = useQuery<unknown, Error>({
+  }: UseQueryResult<SuggestedVideosType, Error> = useQuery<
+    SuggestedVideosType,
+    Error
+  >({
     queryKey: ["suggested_videos", videoID],
     queryFn: () =>
       fetchData(`search?part=snippet&relatedToVideoId=${videoID}&type=video`),

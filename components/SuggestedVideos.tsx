@@ -7,6 +7,7 @@ import { setVideoID } from "../features/video/videoSlice";
 import { truncateText } from "@/utils/truncateText";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { SuggestedVideosDescriptionType } from "@/types/SuggestedVideos";
 import styles from "@/styles/SuggestedVideos.module.scss";
 
 dayjs.extend(relativeTime);
@@ -17,7 +18,7 @@ const getTimePassed = (uploadDate: string) => {
   return uploadTime.from(now);
 };
 
-const SuggestedVideos = ({ videos }) => {
+const SuggestedVideos = ({ videos }: SuggestedVideosDescriptionType) => {
   const router = useRouter();
 
   const videoID = useSelector((state: RootState) => state.video.videoID);
