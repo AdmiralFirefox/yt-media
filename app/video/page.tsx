@@ -7,6 +7,7 @@ import { RootState } from "@/app/store";
 import ReactPlayer from "react-player/youtube";
 import VideoDescription from "@/components/VideoDescription";
 import { VideoTypes } from "@/types/VideoDetailsType";
+import SuggestedVideos from "@/components/SuggestedVideos";
 import styles from "@/styles/Video.module.scss";
 
 export default function Video() {
@@ -14,9 +15,9 @@ export default function Video() {
 
   const {
     data: video,
-    isLoading,
-    isError,
-    error,
+    isLoading: isVideoLoading,
+    isError: isVideoError,
+    error: videoError,
   }: UseQueryResult<VideoTypes, Error> = useQuery<VideoTypes, Error>({
     queryKey: ["video", videoID],
     queryFn: () => fetchData(`videos?part=snippet,statistics&id=${videoID}`),
@@ -24,13 +25,36 @@ export default function Video() {
     enabled: Boolean(videoID),
   });
 
-  if (isLoading) {
+  const {
+    data: suggestedVideos,
+    isLoading: isVideosLoading,
+    isError: isVideosError,
+    error: videosError,
+  }: UseQueryResult<unknown, Error> = useQuery<unknown, Error>({
+    queryKey: ["suggested_videos", videoID],
+    queryFn: () =>
+      fetchData(`search?part=snippet&relatedToVideoId=${videoID}&type=video`),
+    staleTime: 30000,
+    enabled: Boolean(videoID),
+  });
+
+  if (isVideoLoading) {
     return <h1>Loading...</h1>;
   }
 
-  if (isError) {
-    return <h1>{error!.message}</h1>;
+  if (isVideoError) {
+    return <h1>{videoError!.message}</h1>;
   }
+
+  if (isVideosLoading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (isVideosError) {
+    return <h1>{videosError!.message}</h1>;
+  }
+
+  // console.log(suggestedVideos.items)
 
   return (
     <main className={styles["container"]}>
@@ -46,13 +70,8 @@ export default function Video() {
 
         <VideoDescription video={video.items[0]} />
       </div>
-      <div>
-        {[...Array(10)].map((_e, key) => (
-          <div key={key + 1} style={{ marginRight: "13em" }}>
-            <h1>{key + 1}</h1>
-          </div>
-        ))}
-      </div>
+
+      <SuggestedVideos videos={suggestedVideos.items} />
     </main>
   );
 }
