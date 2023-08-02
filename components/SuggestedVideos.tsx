@@ -8,6 +8,7 @@ import { truncateText } from "@/utils/truncateText";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { SuggestedVideosDescriptionType } from "@/types/SuggestedVideos";
+import { decode } from "html-entities";
 import styles from "@/styles/SuggestedVideos.module.scss";
 
 dayjs.extend(relativeTime);
@@ -51,7 +52,7 @@ const SuggestedVideos = ({ videos }: SuggestedVideosDescriptionType) => {
             </div>
             <div className={styles["video-details"]}>
               <p className={styles["video-title"]}>
-                {truncateText(video.snippet.title, 70)}
+                {truncateText(decode(video.snippet.title), 70)}
               </p>
               <p className={styles["video-channel-title"]}>
                 {video.snippet.channelTitle}

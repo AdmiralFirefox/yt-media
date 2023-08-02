@@ -11,6 +11,7 @@ import { fetchData } from "@/utils/fetchData";
 import { truncateText } from "@/utils/truncateText";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { decode } from "html-entities";
 import styles from "@/styles/Search.module.scss";
 
 dayjs.extend(relativeTime);
@@ -81,7 +82,7 @@ export default function Search() {
 
               <div className={styles["video-details"]}>
                 <p className={styles["video-title"]}>
-                  {truncateText(video.snippet.title, 70)}
+                  {truncateText(decode(video.snippet.title), 70)}
                 </p>
                 <p className={styles["video-channel-title"]}>
                   {video.snippet.channelTitle}

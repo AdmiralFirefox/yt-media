@@ -9,6 +9,7 @@ import { BsChevronUp } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { VideoDescriptionTypes } from "@/types/VideoDetailsType";
 import { formatNumber } from "@/utils/formatNumber";
+import { decode } from "html-entities";
 import styles from "@/styles/VideoDescription.module.scss";
 
 dayjs.extend(relativeTime);
@@ -33,7 +34,7 @@ const VideoDescription = ({ video }: VideoDescriptionTypes) => {
 
   return (
     <>
-      <h1 className={styles["video-title"]}>{video.snippet.title}</h1>
+      <h1 className={styles["video-title"]}>{decode(video.snippet.title)}</h1>
 
       <div className={styles["channel-info"]}>
         <Link href="/">{video.snippet.channelTitle}</Link>

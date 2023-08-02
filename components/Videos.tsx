@@ -10,6 +10,7 @@ import { truncateText } from "@/utils/truncateText";
 import { VideosFeedTypes } from "@/types/VideosType";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { decode } from "html-entities";
 import styles from "@/styles/Videos.module.scss";
 
 dayjs.extend(relativeTime);
@@ -55,7 +56,7 @@ const Videos = ({ videos }: VideosFeedTypes) => {
               />
             </div>
             <p className={styles["video-title"]}>
-              {truncateText(video.snippet.title, 70)}
+              {truncateText(decode(video.snippet.title), 70)}
             </p>
             <p className={styles["video-channel-title"]}>
               {video.snippet.channelTitle}
