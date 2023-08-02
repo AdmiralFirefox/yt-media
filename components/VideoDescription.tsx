@@ -1,24 +1,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useElementSize } from "@/hooks/useElementSize";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { AiFillLike } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
 import { BsChevronUp } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { VideoDescriptionTypes } from "@/types/VideoDetailsType";
 import { formatNumber } from "@/utils/formatNumber";
+import { getTimePassed } from "@/utils/getTimePassed";
 import { decode } from "html-entities";
 import styles from "@/styles/VideoDescription.module.scss";
-
-dayjs.extend(relativeTime);
-
-const getTimePassed = (uploadDate: string) => {
-  const now = dayjs();
-  const uploadTime = dayjs(uploadDate);
-  return uploadTime.from(now);
-};
 
 const VideoDescription = ({ video }: VideoDescriptionTypes) => {
   const [collapse, setCollapse] = useState(true);

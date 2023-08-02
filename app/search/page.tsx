@@ -9,18 +9,9 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { setVideoID } from "@/features/video/videoSlice";
 import { fetchData } from "@/utils/fetchData";
 import { truncateText } from "@/utils/truncateText";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { getTimePassed } from "@/utils/getTimePassed";
 import { decode } from "html-entities";
 import styles from "@/styles/Search.module.scss";
-
-dayjs.extend(relativeTime);
-
-const getTimePassed = (uploadDate: string) => {
-  const now = dayjs();
-  const uploadTime = dayjs(uploadDate);
-  return uploadTime.from(now);
-};
 
 export default function Search() {
   const router = useRouter();

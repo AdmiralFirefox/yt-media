@@ -7,19 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { setVideoID } from "../features/video/videoSlice";
 import { truncateText } from "@/utils/truncateText";
+import { getTimePassed } from "@/utils/getTimePassed";
 import { VideosFeedTypes } from "@/types/VideosType";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { decode } from "html-entities";
 import styles from "@/styles/Videos.module.scss";
-
-dayjs.extend(relativeTime);
-
-const getTimePassed = (uploadDate: string) => {
-  const now = dayjs();
-  const uploadTime = dayjs(uploadDate);
-  return uploadTime.from(now);
-};
 
 const Videos = ({ videos }: VideosFeedTypes) => {
   const router = useRouter();
