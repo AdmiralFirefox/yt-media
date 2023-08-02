@@ -3,12 +3,14 @@ import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
-import videoReducer from "../features/video/videoSlice";
-import navbarReducer from "../features/navbar/navbarSlice";
+import videoReducer from "@/features/video/videoSlice";
+import navbarReducer from "@/features/navbar/navbarSlice";
+import searchReducer from "@/features/search/searchSlice";
 
 const reducers = combineReducers({
   video: videoReducer,
   navbar: navbarReducer,
+  search: searchReducer,
 });
 
 const persistConfig = {
