@@ -1,7 +1,8 @@
 @use "./themeprovider/themeprovider" as theme;
 
+// The Main container must not have a padding
+
 .container {
-  padding: 6.5em 0em 3em 0em;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 2em;
@@ -60,7 +61,6 @@
 // 480px above
 @media (min-width: theme.$media-query-extra-small-value) {
   .container {
-    padding: 6.5em 1.5em 3em 1.5em;
     grid-gap: 1em;
 
     .video-card {
@@ -100,8 +100,6 @@
 // 848px above
 @media (min-width: theme.$media-query-large-value) {
   .container {
-    padding: 6.5em 2em 3em 16em;
-
     .video-card {
       grid-template-columns: min(23em, 45%) 1fr;
 
