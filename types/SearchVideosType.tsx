@@ -2,6 +2,7 @@ export interface SearchVideoType {
   id: {
     kind: string;
     videoId: string;
+    channelId: string;
   };
   snippet: {
     channelTitle: string;
@@ -9,6 +10,11 @@ export interface SearchVideoType {
     publishTime: string;
     thumbnails: {
       medium: {
+        height: number;
+        width: number;
+        url: string;
+      };
+      high: {
         height: number;
         width: number;
         url: string;

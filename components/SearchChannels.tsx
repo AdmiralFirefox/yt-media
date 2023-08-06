@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
+import { SearchChannelsTypes } from "@/types/SearchChannelsType";
 import styles from "@/styles/SearchChannels.module.scss";
 
-const SearchChannels = ({ searchChannels }) => {
+const SearchChannels = ({ searchChannels }: SearchChannelsTypes) => {
   return (
     <>
       {searchChannels.filter((channel) => channel.id.kind === "youtube#channel")
