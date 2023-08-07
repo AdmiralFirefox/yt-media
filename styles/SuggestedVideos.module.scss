@@ -29,6 +29,11 @@
         font-family: inherit;
         padding-right: 1em;
         padding-left: 0.6em;
+        overflow-wrap: anywhere;
+
+        @supports not (overflow-wrap: anywhere) {
+          word-break: break-word;
+        }
       }
 
       .video-channel-title {
@@ -39,6 +44,11 @@
         font-family: inherit;
         padding-right: 1em;
         padding-left: 0.7em;
+        overflow-wrap: anywhere;
+
+        @supports not (overflow-wrap: anywhere) {
+          word-break: break-word;
+        }
       }
 
       .video-publish-date {

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Link from "next/link";
 import { useElementSize } from "@/hooks/useElementSize";
 import { AiFillLike } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
@@ -28,7 +27,7 @@ const VideoDescription = ({ video }: VideoDescriptionTypes) => {
       <h1 className={styles["video-title"]}>{decode(video.snippet.title)}</h1>
 
       <div className={styles["channel-info"]}>
-        <Link href="/">{video.snippet.channelTitle}</Link>
+        <button>{video.snippet.channelTitle}</button>
         <div className={styles["like-icon-wrapper"]}>
           <IconContext.Provider value={{ className: styles["like-icon"] }}>
             <AiFillLike />

@@ -8,7 +8,11 @@
   margin-top: 0.5em;
   padding-left: 0.65em;
   padding-right: 1em;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+
+  @supports not (overflow-wrap: anywhere) {
+    word-break: break-word;
+  }
 }
 
 .channel-info {
@@ -20,16 +24,28 @@
   padding-left: 1.3em;
   padding-right: 1em;
 
-  a {
+  button {
+    background: transparent;
     color: theme.$slightly-white-color;
     font-size: 1.25rem;
     text-decoration: none;
     font-weight: 600;
     font-family: inherit;
-    overflow-wrap: break-word;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    overflow-wrap: anywhere;
 
     &:hover {
       text-decoration: underline;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    @supports not (overflow-wrap: anywhere) {
+      word-break: break-word;
     }
   }
 
@@ -93,6 +109,11 @@
         font-family: inherit;
         font-size: 1rem;
         font-weight: 500;
+        overflow-wrap: anywhere;
+
+        @supports not (overflow-wrap: anywhere) {
+          word-break: break-word;
+        }
       }
     }
 
@@ -101,7 +122,11 @@
       margin-top: 1em;
       line-height: 1.45em;
       font-size: 1rem;
-      overflow-wrap: break-word;
+      overflow-wrap: anywhere;
+
+      @supports not (overflow-wrap: anywhere) {
+        word-break: break-word;
+      }
     }
 
     .extra-tags-wrapper {
@@ -116,6 +141,11 @@
         font-family: inherit;
         font-size: 1rem;
         font-weight: 500;
+        overflow-wrap: anywhere;
+
+        @supports not (overflow-wrap: anywhere) {
+          word-break: break-word;
+        }
       }
     }
   }
