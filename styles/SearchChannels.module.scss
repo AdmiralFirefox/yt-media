@@ -30,6 +30,11 @@
       font-weight: 500;
       font-family: inherit;
       padding-top: 0.6em;
+      overflow-wrap: anywhere;
+
+      @supports not (overflow-wrap: anywhere) {
+        word-break: break-word;
+      }
     }
   }
 
@@ -41,6 +46,7 @@
     margin-top: 0.25em;
     position: relative;
     display: block;
+    z-index: -1;
   }
 }
 
