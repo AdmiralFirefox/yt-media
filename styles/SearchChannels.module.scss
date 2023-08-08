@@ -12,6 +12,7 @@
     display: grid;
     grid-template-columns: min(7.5em, 35%) 1fr;
     grid-gap: 1em;
+    cursor: pointer;
 
     .image-wrapper {
       img {

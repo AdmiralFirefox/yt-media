@@ -1,9 +1,20 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { setChannelID } from "@/features/channel/channelSlice";
+import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { SearchChannelsTypes } from "@/types/SearchChannelsType";
 import styles from "@/styles/SearchChannels.module.scss";
 
 const SearchChannels = ({ searchChannels }: SearchChannelsTypes) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const getChannelID = (id: string) => {
+    dispatch(setChannelID(id));
+    router.push("/channel");
+  };
+
   return (
     <>
       {searchChannels.filter((channel) => channel.id.kind === "youtube#channel")
@@ -12,7 +23,11 @@ const SearchChannels = ({ searchChannels }: SearchChannelsTypes) => {
           {searchChannels
             .filter((channel) => channel.id.kind === "youtube#channel")
             .map((channel) => (
-              <li key={uuidv4()} className={styles["channel-card"]}>
+              <li
+                key={uuidv4()}
+                className={styles["channel-card"]}
+                onClick={() => getChannelID(channel.id.channelId)}
+              >
                 <div className={styles["image-wrapper"]}>
                   <Image
                     src={channel.snippet.thumbnails.high.url}

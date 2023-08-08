@@ -6,11 +6,13 @@ import thunk from "redux-thunk";
 import videoReducer from "@/features/video/videoSlice";
 import navbarReducer from "@/features/navbar/navbarSlice";
 import searchReducer from "@/features/search/searchSlice";
+import channelReducer from "@/features/channel/channelSlice";
 
 const reducers = combineReducers({
   video: videoReducer,
   navbar: navbarReducer,
   search: searchReducer,
+  channel: channelReducer,
 });
 
 const persistConfig = {

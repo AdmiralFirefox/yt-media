@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { setChannelID } from "@/features/channel/channelSlice";
+import { useDispatch } from "react-redux";
 import { useElementSize } from "@/hooks/useElementSize";
 import { AiFillLike } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
@@ -11,6 +14,9 @@ import { decode } from "html-entities";
 import styles from "@/styles/VideoDescription.module.scss";
 
 const VideoDescription = ({ video }: VideoDescriptionTypes) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const [collapse, setCollapse] = useState(true);
   const [videoDetailRef, { height }] = useElementSize();
 
@@ -22,12 +28,19 @@ const VideoDescription = ({ video }: VideoDescriptionTypes) => {
     setCollapse(false);
   };
 
+  const getChannelID = (id: string) => {
+    dispatch(setChannelID(id));
+    router.push("/channel");
+  };
+
   return (
     <>
       <h1 className={styles["video-title"]}>{decode(video.snippet.title)}</h1>
 
       <div className={styles["channel-info"]}>
-        <button>{video.snippet.channelTitle}</button>
+        <button onClick={() => getChannelID(video.snippet.channelId)}>
+          {video.snippet.channelTitle}
+        </button>
         <div className={styles["like-icon-wrapper"]}>
           <IconContext.Provider value={{ className: styles["like-icon"] }}>
             <AiFillLike />
