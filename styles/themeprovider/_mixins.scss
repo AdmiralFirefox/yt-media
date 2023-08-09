@@ -1,0 +1,13 @@
+@mixin skeleton-loading-animate() {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background: #717171;
+  }
+
+  100% {
+    background: #ffffff33;
+  }
+}

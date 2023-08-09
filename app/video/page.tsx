@@ -8,6 +8,7 @@ import ReactPlayer from "react-player/youtube";
 import VideoDescription from "@/components/VideoDescription";
 import { VideoTypes } from "@/types/VideoDetailsType";
 import SuggestedVideos from "@/components/SuggestedVideos";
+import VideoLoading from "@/components/Loading/VideoLoading";
 import { SuggestedVideosType } from "@/types/SuggestedVideosType";
 import styles from "@/styles/Video.module.scss";
 
@@ -43,19 +44,11 @@ export default function Video() {
   });
 
   if (isVideoLoading) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (isVideoError) {
-    return <h1>{videoError!.message}</h1>;
+    return <VideoLoading />;
   }
 
   if (isVideosLoading) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (isVideosError) {
-    return <h1>{videosError!.message}</h1>;
+    return <VideoLoading />;
   }
 
   // console.log(suggestedVideos.items)
@@ -72,10 +65,10 @@ export default function Video() {
           />
         </div>
 
-        <VideoDescription video={video.items[0]} />
+        <VideoDescription video={video!.items[0]} />
       </div>
 
-      <SuggestedVideos videos={suggestedVideos.items} />
+      <SuggestedVideos videos={suggestedVideos!.items} />
     </main>
   );
 }
