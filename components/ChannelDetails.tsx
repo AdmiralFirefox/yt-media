@@ -1,22 +1,34 @@
 import Image from "next/image";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { formatNumber } from "@/utils/formatNumber";
 import styles from "@/styles/ChannelDetails.module.scss";
 
 const ChannelDetails = ({ channel }) => {
-  //   console.log(channel);
+  const largeScreens = useMediaQuery("(min-width: 30em)");
 
   return (
     <>
-      {/* <div className={styles["banner-wrapper"]}>
-        <Image
-          src={channel.brandingSettings.image.bannerExternalUrl}
-          alt=""
-          width={600}
-          height={100}
-          quality={90}
-          unoptimized
-        />
-      </div> */}
+      <div className={styles["banner-wrapper"]}>
+        {largeScreens ? (
+          <Image
+            src={`${channel.brandingSettings.image.bannerExternalUrl}=w2120-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj`}
+            alt=""
+            width={600}
+            height={400}
+            quality={90}
+            unoptimized
+          />
+        ) : (
+          <Image
+            src={`${channel.brandingSettings.image.bannerExternalUrl}=w1440-fcrop64=1,32b75a57cd48a5a8-k-c0xffffffff-no-nd-rj`}
+            alt=""
+            width={600}
+            height={400}
+            quality={90}
+            unoptimized
+          />
+        )}
+      </div>
 
       <div className={styles["channel-details"]}>
         <div className={styles["channel-image-wrapper"]}>
