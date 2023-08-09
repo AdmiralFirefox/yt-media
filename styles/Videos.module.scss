@@ -57,6 +57,16 @@
       padding-right: 1em;
       padding-left: 0.7em;
     }
+
+    .video-publish-date-channel {
+      color: theme.$very-light-gray-color;
+      margin-top: 0.5em;
+      font-size: 0.95rem;
+      font-weight: 400;
+      font-family: inherit;
+      padding-right: 1em;
+      padding-left: 0.7em;
+    }
   }
 }
 
@@ -86,6 +96,11 @@
       }
 
       .video-publish-date {
+        padding-right: 0em;
+        padding-left: 0em;
+      }
+
+      .video-publish-date-channel {
         padding-right: 0em;
         padding-left: 0em;
       }

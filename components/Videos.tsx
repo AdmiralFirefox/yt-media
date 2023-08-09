@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { setVideoID } from "../features/video/videoSlice";
@@ -14,6 +15,7 @@ import styles from "@/styles/Videos.module.scss";
 const Videos = ({ videos }: VideosFeedTypes) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const pathname = usePathname();
 
   const getVideoID = (id: string) => {
     dispatch(setVideoID(id));
@@ -46,12 +48,20 @@ const Videos = ({ videos }: VideosFeedTypes) => {
             <p className={styles["video-title"]}>
               {truncateText(decode(video.snippet.title), 70)}
             </p>
-            <p className={styles["video-channel-title"]}>
-              {video.snippet.channelTitle}
-            </p>
-            <p className={styles["video-publish-date"]}>
-              {getTimePassed(video.snippet.publishTime)}
-            </p>
+            {pathname === "/channel" ? null : (
+              <p className={styles["video-channel-title"]}>
+                {video.snippet.channelTitle}
+              </p>
+            )}
+            {pathname === "/channel" ? (
+              <p className={styles["video-publish-date-channel"]}>
+                {getTimePassed(video.snippet.publishTime)}
+              </p>
+            ) : (
+              <p className={styles["video-publish-date"]}>
+                {getTimePassed(video.snippet.publishTime)}
+              </p>
+            )}
           </li>
         ))}
     </ul>
