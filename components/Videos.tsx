@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { RootState } from "@/app/store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { setVideoID } from "../features/video/videoSlice";
 import { truncateText } from "@/utils/truncateText";
@@ -14,8 +13,6 @@ import styles from "@/styles/Videos.module.scss";
 
 const Videos = ({ videos }: VideosFeedTypes) => {
   const router = useRouter();
-
-  const videoID = useSelector((state: RootState) => state.video.videoID);
   const dispatch = useDispatch();
 
   const getVideoID = (id: string) => {
