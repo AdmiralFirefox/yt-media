@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { setVideoID } from "../features/video/videoSlice";
 import { truncateText } from "@/utils/truncateText";
 import { getTimePassed } from "@/utils/getTimePassed";
-import { SuggestedVideosDescriptionType } from "@/types/SuggestedVideos";
+import { SuggestedVideosDescriptionType } from "@/types/SuggestedVideosType";
 import { decode } from "html-entities";
 import styles from "@/styles/SuggestedVideos.module.scss";
 

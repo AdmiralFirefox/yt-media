@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { formatNumber } from "@/utils/formatNumber";
+import { ChannelDetailInfoType } from "@/types/ChannelDetailsType";
 import styles from "@/styles/ChannelDetails.module.scss";
 
-const ChannelDetails = ({ channel }) => {
+const ChannelDetails = ({ channel }:  ChannelDetailInfoType) => {
   const largeScreens = useMediaQuery("(min-width: 30em)");
 
   return (

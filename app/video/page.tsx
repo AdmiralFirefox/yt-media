@@ -8,7 +8,7 @@ import ReactPlayer from "react-player/youtube";
 import VideoDescription from "@/components/VideoDescription";
 import { VideoTypes } from "@/types/VideoDetailsType";
 import SuggestedVideos from "@/components/SuggestedVideos";
-import { SuggestedVideosType } from "@/types/SuggestedVideos";
+import { SuggestedVideosType } from "@/types/SuggestedVideosType";
 import styles from "@/styles/Video.module.scss";
 
 export default function Video() {

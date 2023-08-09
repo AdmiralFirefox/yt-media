@@ -5,6 +5,8 @@ import { fetchData } from "@/utils/fetchData";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import Videos from "@/components/Videos";
+import { VideosCategoryTypes } from "@/types/VideosType";
+import { ChannelType } from "@/types/ChannelDetailsType";
 import ChannelDetails from "@/components/ChannelDetails";
 
 export default function Channel() {
@@ -15,7 +17,7 @@ export default function Channel() {
     isLoading: isChannelLoading,
     isError: isChannelError,
     error: channelError,
-  }: UseQueryResult<unknown, Error> = useQuery<unknown, Error>({
+  }: UseQueryResult<ChannelType, Error> = useQuery<ChannelType, Error>({
     queryKey: ["channel_data", channelID],
     queryFn: () => fetchData(`channels?part=snippet&id=${channelID}`),
     staleTime: 30000,
@@ -27,7 +29,10 @@ export default function Channel() {
     isLoading: isVideosLoading,
     isError: isVideosError,
     error: videosError,
-  }: UseQueryResult<unknown, Error> = useQuery<unknown, Error>({
+  }: UseQueryResult<VideosCategoryTypes, Error> = useQuery<
+    VideosCategoryTypes,
+    Error
+  >({
     queryKey: ["channel_videos", channelID],
     queryFn: () =>
       fetchData(
@@ -50,8 +55,8 @@ export default function Channel() {
 
   return (
     <main>
-      <ChannelDetails channel={channelData.items[0]} />
-      <Videos videos={channelVideos.items} />
+      <ChannelDetails channel={channelData!.items[0]} />
+      <Videos videos={channelVideos!.items} />
     </main>
   );
 }
