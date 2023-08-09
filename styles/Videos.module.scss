@@ -15,7 +15,6 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
-        border-radius: 5px;
       }
     }
 
@@ -70,6 +69,12 @@
     grid-row-gap: 2em;
 
     .video-card {
+      .image-container {
+        img {
+          border-radius: 5px;
+        }
+      }
+
       .video-title {
         padding-right: 0em;
         padding-left: 0em;
