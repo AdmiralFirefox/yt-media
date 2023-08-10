@@ -8,6 +8,7 @@ import Videos from "@/components/Videos";
 import { VideosCategoryTypes } from "@/types/VideosType";
 import { ChannelType } from "@/types/ChannelDetailsType";
 import ChannelDetails from "@/components/ChannelDetails";
+import ChannelDetailsLoading from "@/components/Loading/ChannelDetailsLoading";
 
 export default function Channel() {
   const channelID = useSelector((state: RootState) => state.channel.channelID);
@@ -43,11 +44,19 @@ export default function Channel() {
   });
 
   if (isChannelLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <main>
+        <ChannelDetailsLoading />
+      </main>
+    );
   }
 
   if (isVideosLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <main>
+        <ChannelDetailsLoading />
+      </main>
+    );
   }
 
   // console.log(channelData.items[0]);
