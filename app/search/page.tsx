@@ -9,6 +9,7 @@ import { fetchData } from "@/utils/fetchData";
 import SearchVideos from "@/components/SearchVideos";
 import { SearchVideosType } from "@/types/SearchVideosType";
 import SearchChannels from "@/components/SearchChannels";
+import SearchLoading from "@/components/Loading/SearchLoading";
 import styles from "@/styles/SearchFeed.module.scss";
 
 export default function Search() {
@@ -40,11 +41,7 @@ export default function Search() {
   };
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (isError) {
-    return <h1>{error!.message}</h1>;
+    return <SearchLoading />;
   }
 
   //  console.log(searchVideos.items);
@@ -52,8 +49,11 @@ export default function Search() {
 
   return (
     <main className={styles["container"]}>
-      <SearchChannels searchChannels={searchVideos.items} />
-      <SearchVideos searchVideos={searchVideos.items} getVideoID={getVideoID} />
+      <SearchChannels searchChannels={searchVideos!.items} />
+      <SearchVideos
+        searchVideos={searchVideos!.items}
+        getVideoID={getVideoID}
+      />
     </main>
   );
 }
