@@ -9,6 +9,7 @@ import { VideosCategoryTypes } from "@/types/VideosType";
 import { ChannelType } from "@/types/ChannelDetailsType";
 import ChannelDetails from "@/components/ChannelDetails";
 import ChannelDetailsLoading from "@/components/Loading/ChannelDetailsLoading";
+import ChannelVideosLoading from "@/components/Loading/ChannelVideosLoading";
 
 export default function Channel() {
   const channelID = useSelector((state: RootState) => state.channel.channelID);
@@ -47,6 +48,7 @@ export default function Channel() {
     return (
       <main>
         <ChannelDetailsLoading />
+        <ChannelVideosLoading />
       </main>
     );
   }
@@ -55,6 +57,7 @@ export default function Channel() {
     return (
       <main>
         <ChannelDetailsLoading />
+        <ChannelVideosLoading />
       </main>
     );
   }

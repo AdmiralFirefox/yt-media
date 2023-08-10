@@ -1,0 +1,101 @@
+@use "../themeprovider/themeprovider" as theme;
+
+.container {
+  list-style: none;
+  padding: 0em 0em 3em 0em;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2em;
+
+  .videos {
+    .thumbnail {
+      @include theme.skeleton-loading-animate();
+      display: inline-block;
+      --ratio: calc(16 / 9);
+      --h: min(calc(100vw / var(--ratio)), 100vh);
+      height: var(--h);
+      width: 100%;
+    }
+
+    .info-wrapper {
+      padding: 0em 1em;
+
+      .title {
+        @include theme.skeleton-loading-animate();
+        width: min(15em, 100%);
+        height: 1.2em;
+        margin-top: 1em;
+      }
+
+      .date {
+        @include theme.skeleton-loading-animate();
+        width: min(6em, 100%);
+        height: 1em;
+        margin-top: 1em;
+      }
+    }
+  }
+}
+
+// 480px above
+@media (min-width: theme.$media-query-extra-small-value) {
+  .container {
+    padding: 0em 2em 4em 2em;
+    grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+    grid-column-gap: 1.5em;
+    grid-row-gap: 2em;
+
+    .videos {
+      .thumbnail {
+        border-radius: 5px;
+        --h: min(calc(35vw / var(--ratio)), 35vh);
+        height: calc(var(--h) + 1em);
+      }
+
+      .info-wrapper {
+        padding: 0em;
+      }
+    }
+  }
+}
+
+// 848px above
+@media (min-width: theme.$media-query-large-value) {
+  .container {
+    padding: 0em 2em 4em 16em;
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+
+    .videos {
+      .thumbnail {
+        --h: min(calc(35vw / var(--ratio)), 35vh);
+        height: var(--h);
+      }
+    }
+  }
+}
+
+// 1000px above
+@media (min-width: theme.$media-query-extra-large-value) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+
+    .videos {
+      .thumbnail {
+        --h: min(calc(28vw / var(--ratio)), 28vh);
+      }
+    }
+  }
+}
+
+// 1440px above
+@media (min-width: theme.$media-query-large-screen) {
+  .container {
+    grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
+
+    .videos {
+      .thumbnail {
+        height: 14em;
+      }
+    }
+  }
+}
