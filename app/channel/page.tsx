@@ -10,6 +10,7 @@ import { ChannelType } from "@/types/ChannelDetailsType";
 import ChannelDetails from "@/components/ChannelDetails";
 import ChannelDetailsLoading from "@/components/Loading/ChannelDetailsLoading";
 import ChannelVideosLoading from "@/components/Loading/ChannelVideosLoading";
+import ErrorFetchingRequests from "@/components/Error/ErrorFetchingRequests";
 
 export default function Channel() {
   const channelID = useSelector((state: RootState) => state.channel.channelID);
@@ -18,7 +19,6 @@ export default function Channel() {
     data: channelData,
     isLoading: isChannelLoading,
     isError: isChannelError,
-    error: channelError,
   }: UseQueryResult<ChannelType, Error> = useQuery<ChannelType, Error>({
     queryKey: ["channel_data", channelID],
     queryFn: () => fetchData(`channels?part=snippet&id=${channelID}`),
@@ -28,9 +28,8 @@ export default function Channel() {
 
   const {
     data: channelVideos,
-    isLoading: isVideosLoading,
-    isError: isVideosError,
-    error: videosError,
+    isLoading: isChannelVideosLoading,
+    isError: isChannelVideosError,
   }: UseQueryResult<VideosCategoryTypes, Error> = useQuery<
     VideosCategoryTypes,
     Error
@@ -53,7 +52,7 @@ export default function Channel() {
     );
   }
 
-  if (isVideosLoading) {
+  if (isChannelVideosLoading) {
     return (
       <main>
         <ChannelDetailsLoading />
@@ -62,13 +61,21 @@ export default function Channel() {
     );
   }
 
+  if (isChannelError) {
+    return <ErrorFetchingRequests />;
+  }
+
+  if (isChannelVideosError) {
+    return <ErrorFetchingRequests />;
+  }
+
   // console.log(channelData.items[0]);
   // console.log(channelVideos.items);
 
   return (
     <main>
-      <ChannelDetails channel={channelData!.items[0]} />
-      <Videos videos={channelVideos!.items} />
+      <ChannelDetails channel={channelData.items[0]} />
+      <Videos videos={channelVideos.items} />
     </main>
   );
 }

@@ -10,6 +10,7 @@ import SearchVideos from "@/components/SearchVideos";
 import { SearchVideosType } from "@/types/SearchVideosType";
 import SearchChannels from "@/components/SearchChannels";
 import SearchLoading from "@/components/Loading/SearchLoading";
+import ErrorFetchingRequests from "@/components/Error/ErrorFetchingRequests";
 import styles from "@/styles/SearchFeed.module.scss";
 
 export default function Search() {
@@ -23,7 +24,6 @@ export default function Search() {
     data: searchVideos,
     isLoading,
     isError,
-    error,
   }: UseQueryResult<SearchVideosType, Error> = useQuery<
     SearchVideosType,
     Error
@@ -44,16 +44,17 @@ export default function Search() {
     return <SearchLoading />;
   }
 
+  if (isError) {
+    return <ErrorFetchingRequests />;
+  }
+
   //  console.log(searchVideos.items);
   //  console.log(searchValue);
 
   return (
     <main className={styles["container"]}>
-      <SearchChannels searchChannels={searchVideos!.items} />
-      <SearchVideos
-        searchVideos={searchVideos!.items}
-        getVideoID={getVideoID}
-      />
+      <SearchChannels searchChannels={searchVideos.items} />
+      <SearchVideos searchVideos={searchVideos.items} getVideoID={getVideoID} />
     </main>
   );
 }

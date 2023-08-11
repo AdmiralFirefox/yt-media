@@ -9,6 +9,7 @@ import VideoDescription from "@/components/VideoDescription";
 import { VideoTypes } from "@/types/VideoDetailsType";
 import SuggestedVideos from "@/components/SuggestedVideos";
 import VideoLoading from "@/components/Loading/VideoLoading";
+import ErrorFetchingData from "@/components/Error/ErrorFetchingData";
 import { SuggestedVideosType } from "@/types/SuggestedVideosType";
 import styles from "@/styles/Video.module.scss";
 
@@ -19,7 +20,6 @@ export default function Video() {
     data: video,
     isLoading: isVideoLoading,
     isError: isVideoError,
-    error: videoError,
   }: UseQueryResult<VideoTypes, Error> = useQuery<VideoTypes, Error>({
     queryKey: ["video", videoID],
     queryFn: () => fetchData(`videos?part=snippet,statistics&id=${videoID}`),
@@ -29,9 +29,8 @@ export default function Video() {
 
   const {
     data: suggestedVideos,
-    isLoading: isVideosLoading,
-    isError: isVideosError,
-    error: videosError,
+    isLoading: isSuggestedVideosLoading,
+    isError: isSuggestedVideosError,
   }: UseQueryResult<SuggestedVideosType, Error> = useQuery<
     SuggestedVideosType,
     Error
@@ -47,8 +46,16 @@ export default function Video() {
     return <VideoLoading />;
   }
 
-  if (isVideosLoading) {
+  if (isSuggestedVideosLoading) {
     return <VideoLoading />;
+  }
+
+  if (isVideoError) {
+    return <ErrorFetchingData />;
+  }
+
+  if (isSuggestedVideosError) {
+    return <ErrorFetchingData />;
   }
 
   // console.log(suggestedVideos.items)
@@ -65,10 +72,10 @@ export default function Video() {
           />
         </div>
 
-        <VideoDescription video={video!.items[0]} />
+        <VideoDescription video={video.items[0]} />
       </div>
 
-      <SuggestedVideos videos={suggestedVideos!.items} />
+      <SuggestedVideos videos={suggestedVideos.items} />
     </main>
   );
 }
