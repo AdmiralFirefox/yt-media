@@ -127,6 +127,7 @@ $transition: 0.15s linear;
 .navbar {
   padding: 0.85em 1em;
   @include navbar-content-mobile();
+  z-index: 2;
 }
 
 .navbar-video-section {
