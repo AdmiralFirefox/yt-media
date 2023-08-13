@@ -17,6 +17,7 @@ const Navbar = () => {
   const [searchVideo, setSearchVideo] = useState("");
   const pathname = usePathname();
   const showRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -40,6 +41,10 @@ const Navbar = () => {
     e.preventDefault();
     dispatch(setSearchValue(searchVideo));
     router.push("/search");
+
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
   };
 
   useOnClickOutside(showRef, handleClickOutside);
@@ -76,6 +81,7 @@ const Navbar = () => {
           placeholder="Search"
           value={searchVideo}
           onChange={handleInputChange}
+          ref={inputRef}
         />
         <button type="submit">
           <Search width="1.8em" height="1.8em" />
@@ -93,6 +99,7 @@ const Navbar = () => {
             placeholder="Search"
             value={searchVideo}
             onChange={handleInputChange}
+            ref={inputRef}
           />
           <button type="submit">
             <Search width="1.8em" height="1.8em" />
