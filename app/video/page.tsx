@@ -91,7 +91,7 @@ export default function Video() {
       <div className={styles["video-details"]}>
         <div className={styles["video-wrapper"]}>
           <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${videoID}`}
+            url={`https://www.youtube.com/embed/${videoID}`}
             width="100%"
             height="100%"
             controls
