@@ -12,8 +12,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Youtube Clone",
-  description: "Youtube Clone Application made with Next JS",
+  title: "YT Media",
+  description: "A youtube clone application made with Next JS.",
 };
 
 export default function RootLayout({
@@ -23,6 +23,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon.png" />
+        <meta name="theme-color" content="#0f0f0f" />
+      </head>
       <body className={roboto.className}>
         <QueryProvider>
           <ReduxProvider>
