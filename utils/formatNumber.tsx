@@ -1,16 +1,29 @@
+const formatWithSuffix = (num: number, suffix: string) => {
+  if (num === Math.floor(num)) {
+    return num.toString() + suffix;
+  } else {
+    return num.toFixed(1) + suffix;
+  }
+};
+
 export const formatNumber = (num: string) => {
   const numAbs = parseFloat(num);
 
   if (numAbs >= 1e15) {
-    return (parseFloat(num) / 1e15).toFixed(1) + "Q"; // Quadrillions
+    const formattedNum = numAbs / 1e15;
+    return formatWithSuffix(formattedNum, "Q");
   } else if (numAbs >= 1e12) {
-    return (parseFloat(num) / 1e12).toFixed(1) + "T"; // Trillions
+    const formattedNum = numAbs / 1e12;
+    return formatWithSuffix(formattedNum, "T");
   } else if (numAbs >= 1e9) {
-    return (parseFloat(num) / 1e9).toFixed(1) + "B"; // Billions
+    const formattedNum = numAbs / 1e9;
+    return formatWithSuffix(formattedNum, "B");
   } else if (numAbs >= 1e6) {
-    return (parseFloat(num) / 1e6).toFixed(1) + "M"; // Millions
+    const formattedNum = numAbs / 1e6;
+    return formatWithSuffix(formattedNum, "M");
   } else if (numAbs >= 1e3) {
-    return (parseFloat(num) / 1e3).toFixed(1) + "k"; // Thousands
+    const formattedNum = numAbs / 1e3;
+    return formatWithSuffix(formattedNum, "k");
   } else {
     return num.toString();
   }
