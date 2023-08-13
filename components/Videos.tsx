@@ -15,7 +15,7 @@ import LoadingVideoSpinner from "./Loaders/LoadingVideoSpinner";
 import styles from "@/styles/Videos.module.scss";
 
 const Videos = ({ videos }: VideosFeedTypes) => {
-  const { data, isLoading, loadingRef } = useInfiniteScroll({
+  const { data, loadingRef } = useInfiniteScroll({
     initialData: videos,
     pageSize: 10,
     initialLoadCount: 20,
@@ -76,7 +76,9 @@ const Videos = ({ videos }: VideosFeedTypes) => {
           ))}
       </ul>
 
-      <LoadingVideoSpinner isLoading={isLoading} loadingRef={loadingRef} />
+      {data.length === videos.length ? null : (
+        <LoadingVideoSpinner loadingRef={loadingRef} />
+      )}
     </>
   );
 };

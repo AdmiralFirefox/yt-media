@@ -12,7 +12,7 @@ const SearchVideos = ({
   searchVideos,
   getVideoID,
 }: SearchVideosDetailsType) => {
-  const { data, isLoading, loadingRef } = useInfiniteScroll({
+  const { data, loadingRef } = useInfiniteScroll({
     initialData: searchVideos,
     pageSize: 10,
     initialLoadCount: 20,
@@ -56,7 +56,9 @@ const SearchVideos = ({
           ))}
       </ul>
 
-      <LoadingSearchSpinner isLoading={isLoading} loadingRef={loadingRef} />
+      {data.length === searchVideos.length ? null : (
+        <LoadingSearchSpinner loadingRef={loadingRef} />
+      )}
     </>
   );
 };

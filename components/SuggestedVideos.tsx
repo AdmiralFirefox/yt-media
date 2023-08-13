@@ -12,7 +12,7 @@ import LoadingSuggestedSpinner from "./Loaders/LoadingSuggestedSpinner";
 import styles from "@/styles/SuggestedVideos.module.scss";
 
 const SuggestedVideos = ({ videos }: SuggestedVideosDescriptionType) => {
-  const { data, isLoading, loadingRef } = useInfiniteScroll({
+  const { data, loadingRef } = useInfiniteScroll({
     initialData: videos,
     pageSize: 5,
     initialLoadCount: 10,
@@ -63,7 +63,9 @@ const SuggestedVideos = ({ videos }: SuggestedVideosDescriptionType) => {
           ))}
       </ul>
 
-      <LoadingSuggestedSpinner isLoading={isLoading} loadingRef={loadingRef} />
+      {data.length === videos.length ? null : (
+        <LoadingSuggestedSpinner loadingRef={loadingRef} />
+      )}
     </div>
   );
 };
