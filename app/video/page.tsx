@@ -2,15 +2,18 @@
 
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { fetchData } from "@/utils/fetchData";
+import { fetchAlternateVideos } from "@/utils/fetchAlternateVideos";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import ReactPlayer from "react-player/youtube";
 import VideoDescription from "@/components/VideoDescription";
 import { VideoTypes } from "@/types/VideoDetailsType";
 import SuggestedVideos from "@/components/SuggestedVideos";
+import SuggestedVideosAlternative from "@/components/SuggestedVideosAlternative";
 import VideoLoading from "@/components/Loading/VideoLoading";
 import ErrorFetchingData from "@/components/Error/ErrorFetchingData";
 import { SuggestedVideosType } from "@/types/SuggestedVideosType";
+import { SuggestedVideosAltType } from "@/types/SuggestedVideosAltType";
 import styles from "@/styles/Video.module.scss";
 
 export default function Video() {
@@ -42,11 +45,29 @@ export default function Video() {
     enabled: Boolean(videoID),
   });
 
+  const {
+    data: suggestedVideosAlt,
+    isLoading: isSuggestedVideosAltLoading,
+    isError: isSuggestedVideosAltError,
+  }: UseQueryResult<SuggestedVideosAltType, Error> = useQuery<
+    SuggestedVideosAltType,
+    Error
+  >({
+    queryKey: ["suggested_videos_alt", videoID],
+    queryFn: () => fetchAlternateVideos(videoID),
+    staleTime: 30000,
+    enabled: Boolean(videoID),
+  });
+
   if (isVideoLoading) {
     return <VideoLoading />;
   }
 
   if (isSuggestedVideosLoading) {
+    return <VideoLoading />;
+  }
+
+  if (isSuggestedVideosAltLoading) {
     return <VideoLoading />;
   }
 
@@ -58,7 +79,12 @@ export default function Video() {
     return <ErrorFetchingData />;
   }
 
+  if (isSuggestedVideosAltError) {
+    return <ErrorFetchingData />;
+  }
+
   // console.log(suggestedVideos.items)
+  // console.log(suggestedVideosAlt.data);
 
   return (
     <main className={styles["container"]}>
@@ -75,7 +101,11 @@ export default function Video() {
         <VideoDescription video={video.items[0]} />
       </div>
 
-      <SuggestedVideos videos={suggestedVideos.items} />
+      {suggestedVideos.items !== undefined ? (
+        <SuggestedVideos videos={suggestedVideos.items} />
+      ) : (
+        <SuggestedVideosAlternative videos={suggestedVideosAlt.data} />
+      )}
     </main>
   );
 }
