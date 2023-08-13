@@ -10,14 +10,18 @@ const LoadingVideoSpinner = ({
   loadingRef,
 }: LoadingSpinnerProps) => {
   return (
-    <div className={isLoading ? styles["loader"] : ""} ref={loadingRef}>
-      <div className={styles["lds-ring"]}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <>
+      <div style={{ paddingTop: "1em" }} ref={loadingRef}></div>
+
+      <div className={isLoading ? styles["loader"] : ""}>
+        <div className={styles["lds-ring"]}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
