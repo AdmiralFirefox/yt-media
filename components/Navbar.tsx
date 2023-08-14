@@ -35,7 +35,6 @@ const Navbar = () => {
 
   const showRef = useRef(null);
   const autoCompleteRef = useRef<HTMLDivElement | null>(null);
-  const autoCompleteRefMobile = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const debouncedSearch = useDebounce<string>(searchVideo, 1000);
@@ -88,7 +87,6 @@ const Navbar = () => {
 
   useOnClickOutside(showRef, handleClickOutside);
   useOnClickOutside(autoCompleteRef, unFocus);
-  useOnClickOutside(autoCompleteRefMobile, unFocusMobile);
 
   useLockedBody(focusedMobile, "root");
 
@@ -172,7 +170,6 @@ const Navbar = () => {
             focusedMobile={focusedMobile}
             autoCompleteData={autoCompleteData}
             isLoading={isLoading}
-            autoCompleteRefMobile={autoCompleteRefMobile}
             unFocusMobile={unFocusMobile}
             setSearchVideo={setSearchVideo}
           />

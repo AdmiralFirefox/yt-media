@@ -30,9 +30,9 @@ const AutoCompleteDesktop = ({
           {isLoading ? (
             ""
           ) : (
-            <div className={styles["auto-complete-desktop"]}>
+            <ul className={styles["auto-complete-desktop"]}>
               {autoCompleteData.data.map((suggestion, i) => (
-                <div
+                <li
                   key={i}
                   onClick={() => {
                     unFocus();
@@ -43,9 +43,9 @@ const AutoCompleteDesktop = ({
                 >
                   <Search width="1.5em" height="1.5em" />
                   <p>{suggestion.title}</p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           )}
         </>
       ) : null}

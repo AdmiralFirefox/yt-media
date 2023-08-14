@@ -1,16 +1,16 @@
 @use "../themeprovider/themeprovider" as theme;
 
 .auto-complete-desktop {
+  list-style: none;
   display: none;
   background: theme.$slightly-dark-color;
   position: absolute;
   z-index: 2;
-  width: min(31em, 100%);
-  margin-right: 5em;
-  overflow: auto;
+  width: min(30em, 100%);
+  overflow-y: auto;
   max-height: 34em;
 
-  div {
+  li {
     display: flex;
     align-items: center;
     background: transparent;
@@ -19,6 +19,7 @@
 
     svg {
       flex-shrink: 0;
+      align-self: flex-start;
     }
 
     p {
@@ -36,6 +37,22 @@
     &:hover {
       background: theme.$gray-color;
     }
+
+    &:focus {
+      background: theme.$gray-color;
+    }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: theme.$very-light-gray-color;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: theme.$slightly-dark-color;
   }
 }
 

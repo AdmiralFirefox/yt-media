@@ -1,15 +1,16 @@
 @use "../themeprovider/themeprovider" as theme;
 
 .auto-complete-mobile {
+  list-style: none;
   background: theme.$slightly-darker-color;
   position: absolute;
   z-index: 2;
   left: 0;
+  top: 5em;
   width: 100%;
-  overflow: auto;
-  height: calc(100vh - 3em);
+  overflow-y: auto;
 
-  div {
+  li {
     display: flex;
     align-items: center;
     background: transparent;
@@ -18,6 +19,7 @@
 
     svg {
       flex-shrink: 0;
+      align-self: flex-start;
     }
 
     p {
