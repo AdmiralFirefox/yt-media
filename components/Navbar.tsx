@@ -1,35 +1,52 @@
 "use client";
 
-import { useState, useRef, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
-import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import Image from "next/image";
+import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import { useState, useRef, ChangeEvent } from "react";
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
+import { useDebounce } from "@/hooks/useDebounce";
 import useLockedBody from "@/hooks/useLockedBody";
 import { toggleNavbar } from "@/features/navbar/navbarSlice";
 import { setSearchValue } from "@/features/search/searchSlice";
 import Hamburger from "./Icons/Hamburger";
 import Search from "./Icons/Search";
 import Back from "./Icons/Back";
-import styles from "@/styles/Navbar.module.scss";
 import AutoCompleteDesktop from "./AutoComplete/AutoCompleteDesktop";
 import AutoCompleteMobile from "./AutoComplete/AutoCompleteMobile";
+import { fetchAutoCompleteData } from "@/utils/fetchAutoCompleteData";
+import styles from "@/styles/Navbar.module.scss";
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const [showSearch, setShowSearch] = useState(false);
   const [searchVideo, setSearchVideo] = useState("");
+
   const [focused, setFocused] = useState(false);
   const [focusedMobile, setFocusedMobile] = useState(false);
+
   const onFocus = () => setFocused(true);
   const onFocusMobile = () => setFocusedMobile(true);
-  const pathname = usePathname();
+
   const showRef = useRef(null);
   const autoCompleteRef = useRef<HTMLDivElement | null>(null);
   const autoCompleteRefMobile = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const router = useRouter();
-  const dispatch = useDispatch();
+
+  const debouncedSearch = useDebounce<string>(searchVideo, 1000);
+
+  const { data: autoCompleteData, isLoading }: UseQueryResult<unknown, Error> =
+    useQuery<unknown, Error>({
+      queryKey: ["autocomplete", debouncedSearch],
+      queryFn: () => fetchAutoCompleteData(debouncedSearch),
+      staleTime: 30000,
+      enabled: Boolean(debouncedSearch),
+    });
 
   const toggleShowSearch = () => {
     setShowSearch((search) => !search);
@@ -105,7 +122,7 @@ const Navbar = () => {
         )}
       </div>
 
-      <div className={styles["search-wrapper-desktop"]}>
+      <div className={styles["search-wrapper-desktop"]} ref={autoCompleteRef}>
         <form
           className={styles["search-input-desktop"]}
           onSubmit={handleInputSubmit}
@@ -117,6 +134,7 @@ const Navbar = () => {
             onChange={handleInputChange}
             ref={inputRef}
             onFocus={onFocus}
+            required
           />
           <button type="submit">
             <Search width="1.8em" height="1.8em" />
@@ -124,9 +142,10 @@ const Navbar = () => {
         </form>
         <AutoCompleteDesktop
           focused={focused}
+          autoCompleteData={autoCompleteData}
+          isLoading={isLoading}
           unFocus={unFocus}
           setSearchVideo={setSearchVideo}
-          autoCompleteRef={autoCompleteRef}
         />
       </div>
 
@@ -143,6 +162,7 @@ const Navbar = () => {
               onChange={handleInputChange}
               ref={inputRef}
               onFocus={onFocusMobile}
+              required
             />
             <button type="submit">
               <Search width="1.8em" height="1.8em" />
@@ -150,6 +170,8 @@ const Navbar = () => {
           </form>
           <AutoCompleteMobile
             focusedMobile={focusedMobile}
+            autoCompleteData={autoCompleteData}
+            isLoading={isLoading}
             autoCompleteRefMobile={autoCompleteRefMobile}
             unFocusMobile={unFocusMobile}
             setSearchVideo={setSearchVideo}

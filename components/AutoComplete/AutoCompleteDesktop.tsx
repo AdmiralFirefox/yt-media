@@ -1,37 +1,53 @@
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setSearchValue } from "@/features/search/searchSlice";
 import Search from "../Icons/Search";
 import styles from "@/styles/autocomplete/AutoCompleteDesktop.module.scss";
 
 interface AutoCompleteDesktopProps {
   focused: boolean;
+  autoCompleteData: unknown;
+  isLoading: boolean;
   unFocus: () => void;
   setSearchVideo: Dispatch<SetStateAction<string>>;
-  autoCompleteRef: MutableRefObject<HTMLDivElement | null>;
 }
 
 const AutoCompleteDesktop = ({
   focused,
+  autoCompleteData,
+  isLoading,
   unFocus,
   setSearchVideo,
-  autoCompleteRef,
 }: AutoCompleteDesktopProps) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   return (
     <>
-      {focused ? (
-        <div className={styles["auto-complete-desktop"]} ref={autoCompleteRef}>
-          {[...Array(10)].map((_e, i) => (
-            <div
-              key={i}
-              onClick={() => {
-                unFocus();
-                setSearchVideo("Test");
-              }}
-            >
-              <Search width="1.5em" height="1.5em" />
-              <p>Test</p>
+      {focused && autoCompleteData && autoCompleteData.data ? (
+        <>
+          {isLoading ? (
+            ""
+          ) : (
+            <div className={styles["auto-complete-desktop"]}>
+              {autoCompleteData.data.map((suggestion, i) => (
+                <div
+                  key={i}
+                  onClick={() => {
+                    unFocus();
+                    setSearchVideo(suggestion.title);
+                    dispatch(setSearchValue(suggestion.title));
+                    router.push("/search");
+                  }}
+                >
+                  <Search width="1.5em" height="1.5em" />
+                  <p>{suggestion.title}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+        </>
       ) : null}
     </>
   );
