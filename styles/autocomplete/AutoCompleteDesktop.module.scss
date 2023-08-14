@@ -1,0 +1,46 @@
+@use "../themeprovider/themeprovider" as theme;
+
+.auto-complete-desktop {
+  display: none;
+  background: theme.$slightly-dark-color;
+  position: absolute;
+  z-index: 2;
+  width: min(31em, 100%);
+  margin-right: 5em;
+  overflow: auto;
+  height: min(34em, 100vh);
+
+  div {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 0.9em 1em;
+    cursor: pointer;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    p {
+      color: theme.$white-color;
+      font-size: 0.9rem;
+      font-weight: 400;
+      padding-left: 0.5em;
+      overflow-wrap: anywhere;
+
+      @supports not (overflow-wrap: anywhere) {
+        word-break: break-word;
+      }
+    }
+
+    &:hover {
+      background: theme.$gray-color;
+    }
+  }
+}
+
+@media (min-width: theme.$media-query-large-value) {
+  .auto-complete-desktop {
+    display: block;
+  }
+}

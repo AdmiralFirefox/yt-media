@@ -89,45 +89,6 @@ $transition: 0.15s linear;
       display: none;
       @include search-input-content();
     }
-
-    .auto-complete-desktop {
-      display: none;
-      background: theme.$slightly-dark-color;
-      position: absolute;
-      z-index: 2;
-      width: min(31em, 100%);
-      margin-right: 5em;
-      overflow: auto;
-      height: min(34em, 100vh);
-
-      div {
-        display: flex;
-        align-items: center;
-        background: transparent;
-        padding: 0.9em 1em;
-        cursor: pointer;
-
-        svg {
-          flex-shrink: 0;
-        }
-
-        p {
-          color: theme.$white-color;
-          font-size: 0.9rem;
-          font-weight: 400;
-          padding-left: 0.5em;
-          overflow-wrap: anywhere;
-
-          @supports not (overflow-wrap: anywhere) {
-            word-break: break-word;
-          }
-        }
-
-        &:hover {
-          background: theme.$gray-color;
-        }
-      }
-    }
   }
 
   .search-wrapper-mobile {
@@ -136,44 +97,6 @@ $transition: 0.15s linear;
     .search-input-mobile {
       display: flex;
       @include search-input-content();
-    }
-
-    .auto-complete-mobile {
-      background: theme.$slightly-darker-color;
-      position: absolute;
-      z-index: 2;
-      left: 0;
-      width: 100%;
-      overflow: auto;
-      height: calc(100vh - 3em);
-
-      div {
-        display: flex;
-        align-items: center;
-        background: transparent;
-        padding: 0.9em 1.2em;
-        cursor: pointer;
-
-        svg {
-          flex-shrink: 0;
-        }
-
-        p {
-          color: theme.$white-color;
-          font-size: 1rem;
-          font-weight: 400;
-          padding-left: 0.5em;
-          overflow-wrap: anywhere;
-
-          @supports not (overflow-wrap: anywhere) {
-            word-break: break-word;
-          }
-        }
-
-        &:hover {
-          background: theme.$gray-color;
-        }
-      }
     }
   }
 
@@ -202,10 +125,6 @@ $transition: 0.15s linear;
 
     .search-input-desktop {
       display: flex;
-    }
-
-    .auto-complete-desktop {
-      display: block;
     }
   }
 

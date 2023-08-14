@@ -13,6 +13,8 @@ import Hamburger from "./Icons/Hamburger";
 import Search from "./Icons/Search";
 import Back from "./Icons/Back";
 import styles from "@/styles/Navbar.module.scss";
+import AutoCompleteDesktop from "./AutoComplete/AutoCompleteDesktop";
+import AutoCompleteMobile from "./AutoComplete/AutoCompleteMobile";
 
 const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
@@ -120,25 +122,12 @@ const Navbar = () => {
             <Search width="1.8em" height="1.8em" />
           </button>
         </form>
-        {focused ? (
-          <div
-            className={styles["auto-complete-desktop"]}
-            ref={autoCompleteRef}
-          >
-            {[...Array(10)].map((_e, i) => (
-              <div
-                key={i}
-                onClick={() => {
-                  unFocus();
-                  setSearchVideo("Test");
-                }}
-              >
-                <Search width="1.5em" height="1.5em" />
-                <p>Test</p>
-              </div>
-            ))}
-          </div>
-        ) : null}
+        <AutoCompleteDesktop
+          focused={focused}
+          unFocus={unFocus}
+          setSearchVideo={setSearchVideo}
+          autoCompleteRef={autoCompleteRef}
+        />
       </div>
 
       {showSearch ? (
@@ -159,25 +148,12 @@ const Navbar = () => {
               <Search width="1.8em" height="1.8em" />
             </button>
           </form>
-          {focusedMobile ? (
-            <div
-              className={styles["auto-complete-mobile"]}
-              ref={autoCompleteRefMobile}
-            >
-              {[...Array(10)].map((_e, i) => (
-                <div
-                  key={i}
-                  onClick={() => {
-                    unFocusMobile();
-                    setSearchVideo("Test Mobile");
-                  }}
-                >
-                  <Search width="1.7em" height="1.7em" />
-                  <p>Test</p>
-                </div>
-              ))}
-            </div>
-          ) : null}
+          <AutoCompleteMobile
+            focusedMobile={focusedMobile}
+            autoCompleteRefMobile={autoCompleteRefMobile}
+            unFocusMobile={unFocusMobile}
+            setSearchVideo={setSearchVideo}
+          />
         </div>
       ) : null}
 

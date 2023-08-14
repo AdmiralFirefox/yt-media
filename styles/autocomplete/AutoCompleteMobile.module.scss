@@ -1,0 +1,39 @@
+@use "../themeprovider/themeprovider" as theme;
+
+.auto-complete-mobile {
+  background: theme.$slightly-darker-color;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+  height: calc(100vh - 3em);
+
+  div {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 0.9em 1.2em;
+    cursor: pointer;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    p {
+      color: theme.$white-color;
+      font-size: 1rem;
+      font-weight: 400;
+      padding-left: 0.5em;
+      overflow-wrap: anywhere;
+
+      @supports not (overflow-wrap: anywhere) {
+        word-break: break-word;
+      }
+    }
+
+    &:hover {
+      background: theme.$gray-color;
+    }
+  }
+}
