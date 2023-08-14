@@ -6,17 +6,25 @@ import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
+import useLockedBody from "@/hooks/useLockedBody";
 import { toggleNavbar } from "@/features/navbar/navbarSlice";
 import { setSearchValue } from "@/features/search/searchSlice";
 import Hamburger from "./Icons/Hamburger";
 import Search from "./Icons/Search";
+import Back from "./Icons/Back";
 import styles from "@/styles/Navbar.module.scss";
 
 const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchVideo, setSearchVideo] = useState("");
+  const [focused, setFocused] = useState(false);
+  const [focusedMobile, setFocusedMobile] = useState(false);
+  const onFocus = () => setFocused(true);
+  const onFocusMobile = () => setFocusedMobile(true);
   const pathname = usePathname();
   const showRef = useRef(null);
+  const autoCompleteRef = useRef<HTMLDivElement | null>(null);
+  const autoCompleteRefMobile = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -27,10 +35,19 @@ const Navbar = () => {
 
   const handleClickOutside = () => {
     setShowSearch(false);
+    setFocusedMobile(false);
   };
 
   const showNavbar = () => {
     dispatch(toggleNavbar(true));
+  };
+
+  const unFocus = () => {
+    setFocused(false);
+  };
+
+  const unFocusMobile = () => {
+    setFocusedMobile(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,9 +62,16 @@ const Navbar = () => {
     if (inputRef.current) {
       inputRef.current.blur();
     }
+
+    setFocused(false);
+    setFocusedMobile(false);
   };
 
   useOnClickOutside(showRef, handleClickOutside);
+  useOnClickOutside(autoCompleteRef, unFocus);
+  useOnClickOutside(autoCompleteRefMobile, unFocusMobile);
+
+  useLockedBody(focusedMobile, "root");
 
   return (
     <nav
@@ -58,9 +82,16 @@ const Navbar = () => {
       }
     >
       <div className={styles["web-icons"]}>
-        <button onClick={showNavbar}>
-          <Hamburger width="3.8em" height="3.8em" />
-        </button>
+        {showSearch ? (
+          <button onClick={unFocusMobile}>
+            <Back width="3em" height="3em" />
+          </button>
+        ) : (
+          <button onClick={showNavbar}>
+            <Hamburger width="3.8em" height="3.8em" />
+          </button>
+        )}
+
         {showSearch ? null : (
           <Image
             src="/youtube.png"
@@ -72,26 +103,9 @@ const Navbar = () => {
         )}
       </div>
 
-      <form
-        className={styles["search-input-desktop"]}
-        onSubmit={handleInputSubmit}
-      >
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchVideo}
-          onChange={handleInputChange}
-          ref={inputRef}
-        />
-        <button type="submit">
-          <Search width="1.8em" height="1.8em" />
-        </button>
-      </form>
-
-      {showSearch ? (
+      <div className={styles["search-wrapper-desktop"]}>
         <form
-          className={styles["search-input-mobile"]}
-          ref={showRef}
+          className={styles["search-input-desktop"]}
           onSubmit={handleInputSubmit}
         >
           <input
@@ -100,11 +114,71 @@ const Navbar = () => {
             value={searchVideo}
             onChange={handleInputChange}
             ref={inputRef}
+            onFocus={onFocus}
           />
           <button type="submit">
             <Search width="1.8em" height="1.8em" />
           </button>
         </form>
+        {focused ? (
+          <div
+            className={styles["auto-complete-desktop"]}
+            ref={autoCompleteRef}
+          >
+            {[...Array(10)].map((_e, i) => (
+              <div
+                key={i}
+                onClick={() => {
+                  unFocus();
+                  setSearchVideo("Test");
+                }}
+              >
+                <Search width="1.5em" height="1.5em" />
+                <p>Test</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
+      </div>
+
+      {showSearch ? (
+        <div className={styles["search-wrapper-mobile"]} ref={showRef}>
+          <form
+            className={styles["search-input-mobile"]}
+            onSubmit={handleInputSubmit}
+          >
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchVideo}
+              onChange={handleInputChange}
+              ref={inputRef}
+              onFocus={onFocusMobile}
+            />
+            <button type="submit">
+              <Search width="1.8em" height="1.8em" />
+            </button>
+          </form>
+          {focusedMobile ? (
+            <div
+              className={styles["auto-complete-mobile"]}
+              ref={autoCompleteRefMobile}
+            >
+              {[...Array(10)].map((_e, i) => (
+                <div
+                  key={i}
+                  onClick={() => {
+                    unFocusMobile();
+                    setSearchVideo("Test Mobile");
+                  }}
+                >
+                  <Search width="1.7em" height="1.7em" />
+                  <p>Test</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
       ) : null}
 
       {showSearch ? null : (
