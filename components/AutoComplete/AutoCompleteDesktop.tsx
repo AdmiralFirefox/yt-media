@@ -3,11 +3,12 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setSearchValue } from "@/features/search/searchSlice";
 import Search from "../Icons/Search";
+import { AutoCompleteDataType } from "@/types/AutoCompleteType";
 import styles from "@/styles/autocomplete/AutoCompleteDesktop.module.scss";
 
 interface AutoCompleteDesktopProps {
   focused: boolean;
-  autoCompleteData: unknown;
+  autoCompleteData: AutoCompleteDataType;
   isLoading: boolean;
   unFocus: () => void;
   setSearchVideo: Dispatch<SetStateAction<string>>;

@@ -17,6 +17,7 @@ import Back from "./Icons/Back";
 import AutoCompleteDesktop from "./AutoComplete/AutoCompleteDesktop";
 import AutoCompleteMobile from "./AutoComplete/AutoCompleteMobile";
 import { fetchAutoCompleteData } from "@/utils/fetchAutoCompleteData";
+import { AutoCompleteDataType } from "@/types/AutoCompleteType";
 import styles from "@/styles/Navbar.module.scss";
 
 const Navbar = () => {
@@ -39,13 +40,18 @@ const Navbar = () => {
 
   const debouncedSearch = useDebounce<string>(searchVideo, 1000);
 
-  const { data: autoCompleteData, isLoading }: UseQueryResult<unknown, Error> =
-    useQuery<unknown, Error>({
-      queryKey: ["autocomplete", debouncedSearch],
-      queryFn: () => fetchAutoCompleteData(debouncedSearch),
-      staleTime: 30000,
-      enabled: Boolean(debouncedSearch),
-    });
+  const {
+    data: autoCompleteData,
+    isLoading,
+  }: UseQueryResult<AutoCompleteDataType, Error> = useQuery<
+    AutoCompleteDataType,
+    Error
+  >({
+    queryKey: ["autocomplete", debouncedSearch],
+    queryFn: () => fetchAutoCompleteData(debouncedSearch),
+    staleTime: 30000,
+    enabled: Boolean(debouncedSearch),
+  });
 
   const toggleShowSearch = () => {
     setShowSearch((search) => !search);
@@ -140,7 +146,7 @@ const Navbar = () => {
         </form>
         <AutoCompleteDesktop
           focused={focused}
-          autoCompleteData={autoCompleteData}
+          autoCompleteData={autoCompleteData!}
           isLoading={isLoading}
           unFocus={unFocus}
           setSearchVideo={setSearchVideo}
@@ -168,7 +174,7 @@ const Navbar = () => {
           </form>
           <AutoCompleteMobile
             focusedMobile={focusedMobile}
-            autoCompleteData={autoCompleteData}
+            autoCompleteData={autoCompleteData!}
             isLoading={isLoading}
             unFocusMobile={unFocusMobile}
             setSearchVideo={setSearchVideo}

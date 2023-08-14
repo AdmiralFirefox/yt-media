@@ -4,11 +4,12 @@ import { useDispatch } from "react-redux";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { setSearchValue } from "@/features/search/searchSlice";
 import Search from "../Icons/Search";
+import { AutoCompleteDataType } from "@/types/AutoCompleteType";
 import styles from "@/styles/autocomplete/AutoCompleteMobile.module.scss";
 
 interface AutoCompleteMobileProps {
   focusedMobile: boolean;
-  autoCompleteData: unknown;
+  autoCompleteData: AutoCompleteDataType;
   isLoading: boolean;
   unFocusMobile: () => void;
   setSearchVideo: Dispatch<SetStateAction<string>>;
