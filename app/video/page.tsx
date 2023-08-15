@@ -54,7 +54,7 @@ export default function Video() {
     Error
   >({
     queryKey: ["suggested_videos_alt", videoID],
-    queryFn: () => fetchAlternateVideos(videoID),
+    queryFn: () => fetchAlternateVideos(`related?id=${videoID}&geo=US`),
     staleTime: 30000,
     enabled: Boolean(videoID),
   });
