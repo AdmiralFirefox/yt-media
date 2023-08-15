@@ -3,12 +3,12 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import { v4 as uuidv4 } from "uuid";
-import { setVideoID } from "../features/video/videoSlice";
+import { setVideoID } from "../../features/video/videoSlice";
 import { truncateText } from "@/utils/truncateText";
 import { getTimePassed } from "@/utils/getTimePassed";
-import { SuggestedVideosAltDescriptionType } from "@/types/SuggestedVideosAltType";
+import { SuggestedVideosAltDescriptionType } from "@/types/Alternative/SuggestedVideosAltType";
 import { decode } from "html-entities";
-import LoadingSuggestedSpinner from "./Loaders/LoadingSuggestedSpinner";
+import LoadingSuggestedSpinner from "../Loaders/LoadingSuggestedSpinner";
 import styles from "@/styles/SuggestedVideos.module.scss";
 
 const SuggestedVideosAlternative = ({

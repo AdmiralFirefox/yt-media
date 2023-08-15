@@ -9,11 +9,11 @@ import ReactPlayer from "react-player/youtube";
 import VideoDescription from "@/components/VideoDescription";
 import { VideoTypes } from "@/types/VideoDetailsType";
 import SuggestedVideos from "@/components/SuggestedVideos";
-import SuggestedVideosAlternative from "@/components/SuggestedVideosAlternative";
+import SuggestedVideosAlternative from "@/components/Alternative/SuggestedVideosAlternative";
 import VideoLoading from "@/components/Loading/VideoLoading";
 import ErrorFetchingData from "@/components/Error/ErrorFetchingData";
 import { SuggestedVideosType } from "@/types/SuggestedVideosType";
-import { SuggestedVideosAltType } from "@/types/SuggestedVideosAltType";
+import { SuggestedVideosAltType } from "@/types/Alternative/SuggestedVideosAltType";
 import styles from "@/styles/Video.module.scss";
 
 export default function Video() {
