@@ -2,7 +2,7 @@
 
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { fetchData } from "@/utils/fetchData";
-import { fetchAlternateVideos } from "@/utils/fetchAlternateVideos";
+import { fetchAlternateData } from "@/utils/fetchAlternateData";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import ReactPlayer from "react-player/youtube";
@@ -54,7 +54,7 @@ export default function Video() {
     Error
   >({
     queryKey: ["suggested_videos_alt", videoID],
-    queryFn: () => fetchAlternateVideos(`related?id=${videoID}&geo=US`),
+    queryFn: () => fetchAlternateData(`related?id=${videoID}&geo=US`),
     staleTime: 30000,
     enabled: Boolean(videoID),
   });

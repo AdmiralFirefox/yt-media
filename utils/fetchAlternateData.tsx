@@ -8,7 +8,7 @@ const options = {
   },
 };
 
-export const fetchAlternateVideos = async (url: string) => {
+export const fetchAlternateData = async (url: string) => {
   const res = await fetch(`${BASE_URL}/${url}`, options);
 
   return res.json();
