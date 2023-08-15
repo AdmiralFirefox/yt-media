@@ -31,17 +31,17 @@ const SuggestedVideos = ({ videos }: SuggestedVideosDescriptionType) => {
     <div className={styles["suggestion-wrapper"]}>
       <ul className={styles["container"]}>
         {data
-          .filter((video) => video.id.kind === "youtube#video")
+          .filter((video) => video.type === "video")
           .map((video) => (
             <li
               key={uuidv4()}
-              onClick={() => getVideoID(video.id.videoId)}
+              onClick={() => getVideoID(video.videoId)}
               className={styles["video-card"]}
             >
               <div className={styles["image-container"]}>
                 <Image
-                  src={video.snippet.thumbnails.medium.url}
-                  alt={video.snippet.title}
+                  src={video.thumbnail[video.thumbnail.length - 1].url}
+                  alt={video.title}
                   width={600}
                   height={400}
                   quality={90}
@@ -50,13 +50,13 @@ const SuggestedVideos = ({ videos }: SuggestedVideosDescriptionType) => {
               </div>
               <div className={styles["video-details"]}>
                 <p className={styles["video-title"]}>
-                  {truncateText(decode(video.snippet.title), 70)}
+                  {truncateText(decode(video.title), 70)}
                 </p>
                 <p className={styles["video-channel-title"]}>
-                  {video.snippet.channelTitle}
+                  {video.channelTitle}
                 </p>
                 <p className={styles["video-publish-date"]}>
-                  {getTimePassed(video.snippet.publishTime)}
+                  {getTimePassed(video.publishDate)}
                 </p>
               </div>
             </li>
