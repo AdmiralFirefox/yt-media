@@ -35,7 +35,7 @@ const AutoCompleteMobile = ({
           ) : (
             <ul
               className={styles["auto-complete-mobile"]}
-              style={{ height: `calc(${height}px - 5em)` }}
+              style={{ height: `calc(${height}px - 4.5em)` }}
             >
               {autoCompleteData.data.map((suggestion, i) => (
                 <li
