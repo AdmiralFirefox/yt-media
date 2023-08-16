@@ -21,7 +21,10 @@ export default function Channel() {
     isError: isChannelError,
   }: UseQueryResult<ChannelType, Error> = useQuery<ChannelType, Error>({
     queryKey: ["channel_data", channelID],
-    queryFn: () => fetchData(`channels?part=snippet&id=${channelID}`),
+    queryFn: () =>
+      fetchData(
+        `channels?part=snippet%2Cstatistics%2CbrandingSettings&id=${channelID}`
+      ),
     staleTime: 30000,
     enabled: Boolean(channelID),
   });
@@ -37,7 +40,7 @@ export default function Channel() {
     queryKey: ["channel_videos", channelID],
     queryFn: () =>
       fetchData(
-        `search?channelId=${channelID}&part=snippet%2Cid&order=date&maxResults=50`
+        `search?part=snippet&channelId=${channelID}&maxResults=50&order=date`
       ),
     staleTime: 30000,
     enabled: Boolean(channelID),

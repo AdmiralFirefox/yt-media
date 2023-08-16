@@ -23,7 +23,10 @@ export default function Video() {
     isError: isVideoError,
   }: UseQueryResult<VideoTypes, Error> = useQuery<VideoTypes, Error>({
     queryKey: ["video", videoID],
-    queryFn: () => fetchData(`videos?part=snippet,statistics&id=${videoID}`),
+    queryFn: () =>
+      fetchData(
+        `videos?part=contentDetails%2Csnippet%2Cstatistics&id=${videoID}`
+      ),
     staleTime: 30000,
     enabled: Boolean(videoID),
   });

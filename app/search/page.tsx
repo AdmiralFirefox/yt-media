@@ -30,7 +30,9 @@ export default function Search() {
   >({
     queryKey: ["video", searchValue],
     queryFn: () =>
-      fetchData(`search?part=snippet&maxResults=50&q=${searchValue}`),
+      fetchData(
+        `search?part=snippet&maxResults=50&q=${searchValue}&regionCode=US`
+      ),
     staleTime: 30000,
     enabled: Boolean(searchValue),
   });
