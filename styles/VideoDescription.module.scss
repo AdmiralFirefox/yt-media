@@ -8,6 +8,7 @@
   margin-top: 0.5em;
   padding-left: 0.65em;
   padding-right: 1em;
+  text-align: left;
   overflow-wrap: anywhere;
 
   @supports not (overflow-wrap: anywhere) {
@@ -28,6 +29,7 @@
     background: transparent;
     color: theme.$slightly-white-color;
     font-size: 1.25rem;
+    text-align: left;
     text-decoration: none;
     font-weight: 600;
     font-family: inherit;
@@ -122,6 +124,7 @@
       margin-top: 1em;
       line-height: 1.45em;
       font-size: 1rem;
+      text-align: left;
       overflow-wrap: anywhere;
 
       @supports not (overflow-wrap: anywhere) {

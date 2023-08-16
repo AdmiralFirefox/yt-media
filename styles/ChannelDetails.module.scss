@@ -19,6 +19,7 @@
 
   .channel-image-wrapper {
     width: 7.7em;
+    flex-shrink: 0;
 
     img {
       width: auto;
@@ -43,6 +44,7 @@
         font-size: 1.8rem;
         font-weight: 600;
         font-family: inherit;
+        text-align: center;
         overflow-wrap: anywhere;
 
         @supports not (overflow-wrap: anywhere) {
@@ -84,6 +86,12 @@
       align-items: flex-start;
       padding-right: 1.5em;
       padding-left: 0em;
+
+      .title {
+        p {
+          text-align: left;
+        }
+      }
 
       .statistics {
         justify-content: flex-start;
