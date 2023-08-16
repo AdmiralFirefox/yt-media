@@ -38,4 +38,12 @@
       background: theme.$gray-color;
     }
   }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: theme.$very-light-gray-color;
+  }
 }
