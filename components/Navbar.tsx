@@ -140,7 +140,7 @@ const Navbar = () => {
             onFocus={onFocus}
             required
           />
-          <button type="submit">
+          <button type="submit" aria-label="search video">
             <Search width="1.8em" height="1.8em" />
           </button>
         </form>
@@ -168,7 +168,7 @@ const Navbar = () => {
               onFocus={onFocusMobile}
               required
             />
-            <button type="submit">
+            <button type="submit" aria-label="search video">
               <Search width="1.8em" height="1.8em" />
             </button>
           </form>
