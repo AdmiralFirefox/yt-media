@@ -1,6 +1,6 @@
 # YT Media
 
-A Youtube Clone Application where the data are sourced from YouTube (using [RapidAPI](https://rapidapi.com/hub)). 
+A YouTube Clone Application where the data are sourced from [YouTube's Data API](https://developers.google.com/youtube/v3) and  [RapidAPI.](https://rapidapi.com/hub) 
 
 You can view the live site [here.](https://yt-media-watch.vercel.app/)
 
