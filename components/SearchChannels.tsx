@@ -36,6 +36,7 @@ const SearchChannels = ({ searchChannels }: SearchChannelsTypes) => {
                     height={400}
                     quality={90}
                     unoptimized
+                    priority
                   />
                 </div>
 

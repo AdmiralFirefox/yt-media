@@ -46,6 +46,7 @@ const SuggestedVideos = ({ videos }: SuggestedVideosDescriptionType) => {
                   height={400}
                   quality={90}
                   unoptimized
+                  priority
                 />
               </div>
               <div className={styles["video-details"]}>

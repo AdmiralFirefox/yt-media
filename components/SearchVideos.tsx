@@ -38,6 +38,7 @@ const SearchVideos = ({
                   height={400}
                   quality={90}
                   unoptimized
+                  priority
                 />
               </div>
 

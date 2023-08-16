@@ -53,6 +53,7 @@ const Videos = ({ videos }: VideosFeedTypes) => {
                   height={400}
                   quality={90}
                   unoptimized
+                  priority
                 />
               </div>
               <p className={styles["video-title"]}>

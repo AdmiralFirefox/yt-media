@@ -19,6 +19,7 @@ const ChannelDetails = ({ channel }: ChannelDetailInfoType) => {
               height={400}
               quality={90}
               unoptimized
+              priority
             />
           ) : (
             <Image
@@ -28,6 +29,7 @@ const ChannelDetails = ({ channel }: ChannelDetailInfoType) => {
               height={400}
               quality={90}
               unoptimized
+              priority
             />
           )}
         </div>
@@ -48,6 +50,7 @@ const ChannelDetails = ({ channel }: ChannelDetailInfoType) => {
             height={400}
             quality={90}
             unoptimized
+            priority
           />
         </div>
         <div className={styles["channel-information"]}>
