@@ -106,11 +106,11 @@ const Navbar = () => {
     >
       <div className={styles["web-icons"]}>
         {showSearch ? (
-          <button onClick={unFocusMobile}>
+          <button onClick={unFocusMobile} aria-label="back">
             <Back width="3em" height="3em" />
           </button>
         ) : (
-          <button onClick={showNavbar}>
+          <button onClick={showNavbar} aria-label="menu">
             <Hamburger width="3.8em" height="3.8em" />
           </button>
         )}
@@ -183,7 +183,11 @@ const Navbar = () => {
       ) : null}
 
       {showSearch ? null : (
-        <button onClick={toggleShowSearch} className={styles["mobile-search"]}>
+        <button
+          onClick={toggleShowSearch}
+          className={styles["mobile-search"]}
+          aria-label="search"
+        >
           <Search width="1.8em" height="1.8em" />
         </button>
       )}
