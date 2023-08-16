@@ -2,18 +2,16 @@
 
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { fetchData } from "@/utils/fetchData";
-import { fetchAlternateVideos } from "@/utils/fetchAlternateVideos";
+import { fetchAlternateData } from "@/utils/fetchAlternateData";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
 import ReactPlayer from "react-player/youtube";
 import VideoDescription from "@/components/VideoDescription";
 import { VideoTypes } from "@/types/VideoDetailsType";
 import SuggestedVideos from "@/components/SuggestedVideos";
-import SuggestedVideosAlternative from "@/components/SuggestedVideosAlternative";
 import VideoLoading from "@/components/Loading/VideoLoading";
 import ErrorFetchingData from "@/components/Error/ErrorFetchingData";
 import { SuggestedVideosType } from "@/types/SuggestedVideosType";
-import { SuggestedVideosAltType } from "@/types/SuggestedVideosAltType";
 import styles from "@/styles/Video.module.scss";
 
 export default function Video() {
@@ -25,7 +23,10 @@ export default function Video() {
     isError: isVideoError,
   }: UseQueryResult<VideoTypes, Error> = useQuery<VideoTypes, Error>({
     queryKey: ["video", videoID],
-    queryFn: () => fetchData(`videos?part=snippet,statistics&id=${videoID}`),
+    queryFn: () =>
+      fetchData(
+        `videos?part=contentDetails%2Csnippet%2Cstatistics&id=${videoID}`
+      ),
     staleTime: 30000,
     enabled: Boolean(videoID),
   });
@@ -39,22 +40,7 @@ export default function Video() {
     Error
   >({
     queryKey: ["suggested_videos", videoID],
-    queryFn: () =>
-      fetchData(`search?part=snippet&relatedToVideoId=${videoID}&type=video`),
-    staleTime: 30000,
-    enabled: Boolean(videoID),
-  });
-
-  const {
-    data: suggestedVideosAlt,
-    isLoading: isSuggestedVideosAltLoading,
-    isError: isSuggestedVideosAltError,
-  }: UseQueryResult<SuggestedVideosAltType, Error> = useQuery<
-    SuggestedVideosAltType,
-    Error
-  >({
-    queryKey: ["suggested_videos_alt", videoID],
-    queryFn: () => fetchAlternateVideos(videoID),
+    queryFn: () => fetchAlternateData(`related?id=${videoID}&geo=US`),
     staleTime: 30000,
     enabled: Boolean(videoID),
   });
@@ -67,19 +53,11 @@ export default function Video() {
     return <VideoLoading />;
   }
 
-  if (isSuggestedVideosAltLoading) {
-    return <VideoLoading />;
-  }
-
   if (isVideoError) {
     return <ErrorFetchingData />;
   }
 
   if (isSuggestedVideosError) {
-    return <ErrorFetchingData />;
-  }
-
-  if (isSuggestedVideosAltError) {
     return <ErrorFetchingData />;
   }
 
@@ -101,11 +79,7 @@ export default function Video() {
         <VideoDescription video={video.items[0]} />
       </div>
 
-      {suggestedVideos.items !== undefined ? (
-        <SuggestedVideos videos={suggestedVideos.items} />
-      ) : (
-        <SuggestedVideosAlternative videos={suggestedVideosAlt.data} />
-      )}
+      <SuggestedVideos videos={suggestedVideos.data} />
     </main>
   );
 }

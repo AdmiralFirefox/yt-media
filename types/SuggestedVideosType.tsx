@@ -1,24 +1,16 @@
 export interface SuggestedVideoType {
-  id: {
-    kind: string;
-    videoId: string;
-  };
-  snippet: {
-    channelTitle: string;
-    title: string;
-    publishTime: string;
-    thumbnails: {
-      medium: {
-        height: number;
-        width: number;
-        url: string;
-      };
-    };
-  };
+  type: string;
+  videoId: string;
+  thumbnail: {
+    url: string;
+  }[];
+  title: string;
+  channelTitle: string;
+  publishDate: string;
 }
 
 export interface SuggestedVideosType {
-  items: SuggestedVideoType[];
+  data: SuggestedVideoType[];
 }
 
 export interface SuggestedVideosDescriptionType {

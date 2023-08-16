@@ -1,18 +1,9 @@
-const BASE_URL = "https://youtube-v31.p.rapidapi.com";
-
-const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
-    "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
-  },
-  next: { revalidate: 10 },
-};
+const BASE_URL = "https://youtube.googleapis.com/youtube/v3";
 
 export const fetchCategoryData = async (category: string) => {
   const res = await fetch(
-    `${BASE_URL}/search?part=snippet&regionCode=US&maxResults=50&q=${category}`,
-    options
+    `${BASE_URL}/search?part=snippet&maxResults=50&order=date&q=${category}&regionCode=US&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`,
+    { next: { revalidate: 10 } }
   );
 
   return res.json();

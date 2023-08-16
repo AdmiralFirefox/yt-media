@@ -1,15 +1,9 @@
-const BASE_URL = "https://youtube-v31.p.rapidapi.com";
-
-const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY as string,
-    "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
-  },
-};
+const BASE_URL = "https://youtube.googleapis.com/youtube/v3";
 
 export const fetchData = async (url: string) => {
-  const res = await fetch(`${BASE_URL}/${url}`, options);
+  const res = await fetch(
+    `${BASE_URL}/${url}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`
+  );
 
   return res.json();
 };

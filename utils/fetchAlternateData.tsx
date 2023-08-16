@@ -8,8 +8,8 @@ const options = {
   },
 };
 
-export const fetchAlternateVideos = async (id: string) => {
-  const res = await fetch(`${BASE_URL}/related?id=${id}&geo=US`, options);
+export const fetchAlternateData = async (url: string) => {
+  const res = await fetch(`${BASE_URL}/${url}`, options);
 
   return res.json();
 };
