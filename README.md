@@ -13,3 +13,9 @@ You can:
 * Search for videos or channels.
 * View a channel and its details. Also, you can view the videos of that channel. 
 
+<br />
+
+## Demo
+
+https://github.com/AdmiralFirefox/yt-media/assets/79429518/01d41ad0-1544-4ff6-9bc4-1aeb48815b47
+
