@@ -10,7 +10,7 @@ You can:
 
 * View videos on corresponding categories.
 * View a video and its details. Also, you can view suggested videos related to that video. 
-* Search for videos or channels.
+* Search for videos or channels (with autocomplete).
 * View a channel and its details. Also, you can view the videos of that channel. 
 
 <br />
