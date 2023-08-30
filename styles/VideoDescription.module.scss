@@ -77,7 +77,7 @@
   overflow: hidden;
   position: relative;
   background: theme.$slightly-dark-gray-color;
-  transition: max-height 0.4s linear, background 0.15s linear;
+  transition: max-height 0.4s linear;
   border-radius: 10px;
   margin-top: 1.2em;
   margin-left: 1.3em;
@@ -151,10 +151,6 @@
         }
       }
     }
-  }
-
-  &:hover {
-    background: theme.$gray-color;
   }
 }
 
