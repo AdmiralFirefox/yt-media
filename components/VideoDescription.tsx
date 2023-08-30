@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { setChannelID } from "@/features/channel/channelSlice";
 import { useDispatch } from "react-redux";
@@ -16,12 +16,19 @@ import styles from "@/styles/VideoDescription.module.scss";
 const VideoDescription = ({ video }: VideoDescriptionTypes) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const [collapse, setCollapse] = useState(true);
   const [videoDetailRef, { height }] = useElementSize();
 
   const toggleCollapse = () => {
     setCollapse((col) => !col);
+
+    if (scrollRef.current && collapse === false) {
+      scrollRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
   };
 
   const collapseVideoDetail = () => {
@@ -41,7 +48,7 @@ const VideoDescription = ({ video }: VideoDescriptionTypes) => {
         <button onClick={() => getChannelID(video.snippet.channelId)}>
           {video.snippet.channelTitle}
         </button>
-        <div className={styles["like-icon-wrapper"]}>
+        <div className={styles["like-icon-wrapper"]} ref={scrollRef}>
           <IconContext.Provider value={{ className: styles["like-icon"] }}>
             <AiFillLike />
           </IconContext.Provider>
