@@ -24,7 +24,7 @@ const VideoDescription = ({ video }: VideoDescriptionTypes) => {
   const toggleCollapse = () => {
     setCollapse((col) => !col);
 
-    if (scrollRef.current && collapse === false) {
+    if (scrollRef.current && collapse === false && height >= 650) {
       scrollRef.current.scrollIntoView({
         behavior: "smooth",
       });
