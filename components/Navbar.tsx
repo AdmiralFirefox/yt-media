@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import { useState, useRef, ChangeEvent } from "react";
+import { useState, useEffect, useRef, ChangeEvent } from "react";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -18,6 +18,7 @@ import AutoCompleteDesktop from "./AutoComplete/AutoCompleteDesktop";
 import AutoCompleteMobile from "./AutoComplete/AutoCompleteMobile";
 import { fetchAutoCompleteData } from "@/utils/fetchAutoCompleteData";
 import { AutoCompleteDataType } from "@/types/AutoCompleteType";
+import { AutoCompleteIndexRef } from "@/types/AutoCompleteType";
 import styles from "@/styles/Navbar.module.scss";
 
 const Navbar = () => {
@@ -27,6 +28,12 @@ const Navbar = () => {
 
   const [showSearch, setShowSearch] = useState(false);
   const [searchVideo, setSearchVideo] = useState("");
+
+  // Key Events
+  const [focusedButtonIndex, setFocusedButtonIndex] = useState(-1);
+  const focusedVideoTitle = useRef<AutoCompleteIndexRef | null | undefined>(
+    null
+  );
 
   const [focused, setFocused] = useState(false);
   const [focusedMobile, setFocusedMobile] = useState(false);
@@ -91,6 +98,48 @@ const Navbar = () => {
     setFocusedMobile(false);
   };
 
+  // Handling AutoComplete Key Events on Desktop
+  useEffect(() => {
+    const handleKeyDown = (event: {
+      key: string;
+      preventDefault: () => void;
+    }) => {
+      if (autoCompleteData?.data !== undefined) {
+        if (event.key === "ArrowDown") {
+          setFocusedButtonIndex((prevIndex) => {
+            const nextIndex = (prevIndex + 1) % autoCompleteData!.data.length;
+            focusedVideoTitle.current = autoCompleteData?.data[nextIndex];
+            return nextIndex;
+          });
+        } else if (event.key === "ArrowUp") {
+          setFocusedButtonIndex((prevIndex) => {
+            const nextIndex =
+              (prevIndex - 1 + autoCompleteData!.data.length) %
+              autoCompleteData!.data.length;
+            focusedVideoTitle.current = autoCompleteData?.data[nextIndex];
+            return nextIndex;
+          });
+        } else if (event.key === "Enter" && focusedVideoTitle.current) {
+          event.preventDefault();
+          dispatch(setSearchValue(focusedVideoTitle.current.title));
+          router.push("/search");
+          setFocused(false);
+          setFocusedMobile(false);
+
+          if (inputRef.current) {
+            inputRef.current.blur();
+          }
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [autoCompleteData, dispatch, router]);
+
   useOnClickOutside(showRef, handleClickOutside);
   useOnClickOutside(autoCompleteRef, unFocus);
 
@@ -146,6 +195,7 @@ const Navbar = () => {
         </form>
         <AutoCompleteDesktop
           focused={focused}
+          focusedButtonIndex={focusedButtonIndex}
           autoCompleteData={autoCompleteData!}
           isLoading={isLoading}
           unFocus={unFocus}

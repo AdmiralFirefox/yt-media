@@ -8,6 +8,7 @@ import styles from "@/styles/autocomplete/AutoCompleteDesktop.module.scss";
 
 interface AutoCompleteDesktopProps {
   focused: boolean;
+  focusedButtonIndex: number;
   autoCompleteData: AutoCompleteDataType;
   isLoading: boolean;
   unFocus: () => void;
@@ -16,6 +17,7 @@ interface AutoCompleteDesktopProps {
 
 const AutoCompleteDesktop = ({
   focused,
+  focusedButtonIndex,
   autoCompleteData,
   isLoading,
   unFocus,
@@ -34,6 +36,11 @@ const AutoCompleteDesktop = ({
             <ul className={styles["auto-complete-desktop"]}>
               {autoCompleteData.data.map((suggestion, i) => (
                 <li
+                  className={
+                    i === focusedButtonIndex
+                      ? styles["auto-complete-desktop-list-active"]
+                      : styles["auto-complete-desktop-list"]
+                  }
                   key={i}
                   onClick={() => {
                     unFocus();

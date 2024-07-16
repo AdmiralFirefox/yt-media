@@ -1,5 +1,30 @@
 @use "../themeprovider/themeprovider" as theme;
 
+@mixin auto-complete-list($background) {
+  display: flex;
+  align-items: center;
+  background: $background;
+  padding: 0.9em 1em;
+  cursor: pointer;
+
+  svg {
+    flex-shrink: 0;
+    align-self: flex-start;
+  }
+
+  p {
+    color: theme.$white-color;
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding-left: 0.5em;
+    overflow-wrap: anywhere;
+
+    @supports not (overflow-wrap: anywhere) {
+      word-break: break-word;
+    }
+  }
+}
+
 .auto-complete-desktop {
   list-style: none;
   display: none;
@@ -10,29 +35,12 @@
   overflow-y: auto;
   max-height: 34em;
 
-  li {
-    display: flex;
-    align-items: center;
-    background: transparent;
-    padding: 0.9em 1em;
-    cursor: pointer;
+  .auto-complete-desktop-list-active {
+    @include auto-complete-list(theme.$gray-color);
+  }
 
-    svg {
-      flex-shrink: 0;
-      align-self: flex-start;
-    }
-
-    p {
-      color: theme.$white-color;
-      font-size: 0.9rem;
-      font-weight: 400;
-      padding-left: 0.5em;
-      overflow-wrap: anywhere;
-
-      @supports not (overflow-wrap: anywhere) {
-        word-break: break-word;
-      }
-    }
+  .auto-complete-desktop-list {
+    @include auto-complete-list(transparent);
 
     &:hover {
       background: theme.$gray-color;

@@ -3,3 +3,5 @@ export interface AutoCompleteDataType {
     title: string;
   }[];
 }
+
+export type AutoCompleteIndexRef = { title: string };
